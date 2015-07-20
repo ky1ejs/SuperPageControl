@@ -39,4 +39,4 @@ Please write more and PR :smile:
 ### Todo
 
 - [ ] Delegate handling of dot colors
-- [ ] Weak delegate - problem with making SuperPageControlDelegate and keeping enum association. See code comment.
+- [ ] Weak delegate - problem with making SuperPageControlDelegate Equatable and keeping enum association. See code comment.
