@@ -64,22 +64,22 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
 }
 
 @IBDesignable public class SuperPageControl: UIControl {
-    @IBInspectable var numberOfPages: Int = 1 {
+    @IBInspectable public var numberOfPages: Int = 1 {
         didSet {
             if numberOfPages != oldValue {
                 self.setNeedsDisplay()
             }
         }
     }
-    @IBInspectable var currentPage: Int = 1 {
+    @IBInspectable public var currentPage: Int = 1 {
         didSet {
             if currentPage != oldValue {
                 self.setNeedsDisplay()
             }
         }
     }
-    @IBInspectable var defersCurrentPageDisplay: Bool = false
-    @IBInspectable var hidesForSinglePage = false {
+    @IBInspectable public var defersCurrentPageDisplay: Bool = false
+    @IBInspectable public var hidesForSinglePage = false {
         didSet {
             if hidesForSinglePage != oldValue {
                 self.setNeedsDisplay()
@@ -87,7 +87,7 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
         }
     }
 //    @property (nonatomic, assign, getter = isWrapEnabled) IBInspectable BOOL wrapEnabled;
-    @IBInspectable var vertical: Bool = false {
+    @IBInspectable public var vertical: Bool = false {
         didSet {
             if vertical != oldValue {
                 self.setNeedsDisplay()
@@ -95,49 +95,49 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
         }
     }
     
-    @IBInspectable var dotSpaceing: CGFloat = 10 {
+    @IBInspectable public var dotSpaceing: CGFloat = 10 {
         didSet {
             if dotSpaceing != oldValue {
                 self.setNeedsDisplay()
             }
         }
     }
-    @IBInspectable var dotSize: CGFloat = 10 {
+    @IBInspectable public var dotSize: CGFloat = 10 {
         didSet {
             if dotSize != oldValue {
                 self.setNeedsDisplay()
             }
         }
     }
-    @IBInspectable var dotShadowOffset: CGSize = CGSizeMake(0, 1) {
+    @IBInspectable public var dotShadowOffset: CGSize = CGSizeMake(0, 1) {
         didSet {
             if dotShadowOffset != oldValue {
                 self.setNeedsDisplay()
             }
         }
     }
-    var mode = SuperPageControlDotMode.Shape(shape: .Circle, selectedShape: nil) {
+    public var mode = SuperPageControlDotMode.Shape(shape: .Circle, selectedShape: nil) {
         didSet {
             if mode != oldValue {
                 self.setNeedsDisplay()
             }
         }
     }
-    @IBInspectable var dotColor: UIColor? {
+    @IBInspectable public var dotColor: UIColor? {
         didSet {
             if dotColor != oldValue {
                 self.setNeedsDisplay()
             }
         }
     }
-    @IBInspectable var dotShadowColor: UIColor = .clearColor() {
+    @IBInspectable public var dotShadowColor: UIColor = .clearColor() {
         didSet {
             if dotShadowColor != oldValue {
                 self.setNeedsDisplay()
             }
         }
     }
-    @IBInspectable var dotShadowBlur: CGFloat = 0 {
+    @IBInspectable public var dotShadowBlur: CGFloat = 0 {
         didSet {
             if dotShadowBlur != oldValue {
                 self.setNeedsDisplay()
@@ -145,35 +145,35 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
         }
     }
     
-    @IBInspectable var selectedDotSize: CGFloat? {
+    @IBInspectable public var selectedDotSize: CGFloat? {
         didSet {
             if selectedDotSize != oldValue {
                 self.setNeedsDisplay()
             }
         }
     }
-    @IBInspectable var selectedDotColor: UIColor = .blackColor() {
+    @IBInspectable public var selectedDotColor: UIColor = .blackColor() {
         didSet {
             if selectedDotColor != oldValue {
                 self.setNeedsDisplay()
             }
         }
     }
-    @IBInspectable var selectedDotShadowColor: UIColor? {
+    @IBInspectable public var selectedDotShadowColor: UIColor? {
         didSet {
             if selectedDotShadowColor != oldValue {
                 self.setNeedsDisplay()
             }
         }
     }
-    @IBInspectable var selectedDotShadowBlur: CGFloat? {
+    @IBInspectable public var selectedDotShadowBlur: CGFloat? {
         didSet {
             if selectedDotShadowBlur != oldValue {
                 self.setNeedsDisplay()
             }
         }
     }
-    @IBInspectable var selectedDotShadowOffset: CGSize? {
+    @IBInspectable public var selectedDotShadowOffset: CGSize? {
         didSet {
             if selectedDotShadowOffset != oldValue {
                 self.setNeedsDisplay()
@@ -196,12 +196,12 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
         self.initialise()
     }
     
-    func sizeForNumberOfPages(numberOfPages: Int) -> CGSize {
+    public func sizeForNumberOfPages(numberOfPages: Int) -> CGSize {
         let width = self.dotSize + (self.dotSize + self.dotSpaceing) * CGFloat((numberOfPages - 1))
         return self.vertical ? CGSizeMake(self.dotSize, width) : CGSizeMake(width, self.dotSize);
     }
     
-    func updateCurrentPageDisplay() {
+    public func updateCurrentPageDisplay() {
         self.setNeedsDisplay()
     }
     
