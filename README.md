@@ -1,4 +1,4 @@
-This project is a port of Nick Lockwood's [FXPageControl](https://github.com/nicklockwood/FXPageControl) – awaiting his blessing.
+This project is a re-write of Nick Lockwood's [FXPageControl](https://github.com/nicklockwood/FXPageControl) in Swift – awaiting his blessing.
 
 SuperPageControl is a replacement for UIPageControl that gives:
 
@@ -7,13 +7,13 @@ SuperPageControl is a replacement for UIPageControl that gives:
 - Granular control over each dot
 
 
-## Carthage
+### Carthage
 
 ```
 github "kylejm/SuperPageControl" >= 0.1
 ```
 
-## Modes
+### Modes
 
 ```swift
 .Image(UIImage)
@@ -24,7 +24,7 @@ github "kylejm/SuperPageControl" >= 0.1
 
 The `.Individual`'s associated delegate gets asked for the mode for each individual dot.
 
-## Preset shapes
+### Preset shapes
 
 ```swift
 enum SuperPageControlDotShape {
@@ -34,9 +34,9 @@ enum SuperPageControlDotShape {
 }
 ```
 
-## Todo
+Please write more and PR :smile:
+
+### Todo
 
 - [ ] Delegate handling of dot colors
 - [ ] Weak delegate - problem with making SuperPageControlDelegate and keeping enum association. See code comment.
-
-Please write more and PR :smile:
