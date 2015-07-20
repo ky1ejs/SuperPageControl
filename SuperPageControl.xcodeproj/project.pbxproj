@@ -10,7 +10,7 @@
 		AFCB5D231B5D497C0070E80E /* SuperPageControl.h in Headers */ = {isa = PBXBuildFile; fileRef = AFCB5D221B5D497C0070E80E /* SuperPageControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AFCB5D291B5D497D0070E80E /* SuperPageControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFCB5D1D1B5D497C0070E80E /* SuperPageControl.framework */; };
 		AFCB5D301B5D497D0070E80E /* SuperPageControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCB5D2F1B5D497D0070E80E /* SuperPageControlTests.swift */; };
-		AFCB5D3A1B5D49A60070E80E /* LootPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCB5D391B5D49A60070E80E /* LootPageControl.swift */; };
+		AFCB5D3A1B5D49A60070E80E /* SuperPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCB5D391B5D49A60070E80E /* SuperPageControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -30,7 +30,7 @@
 		AFCB5D281B5D497D0070E80E /* SuperPageControlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperPageControlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFCB5D2E1B5D497D0070E80E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFCB5D2F1B5D497D0070E80E /* SuperPageControlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperPageControlTests.swift; sourceTree = "<group>"; };
-		AFCB5D391B5D49A60070E80E /* LootPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LootPageControl.swift; sourceTree = "<group>"; };
+		AFCB5D391B5D49A60070E80E /* SuperPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperPageControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +73,7 @@
 		AFCB5D1F1B5D497C0070E80E /* SuperPageControl */ = {
 			isa = PBXGroup;
 			children = (
-				AFCB5D391B5D49A60070E80E /* LootPageControl.swift */,
+				AFCB5D391B5D49A60070E80E /* SuperPageControl.swift */,
 				AFCB5D221B5D497C0070E80E /* SuperPageControl.h */,
 				AFCB5D201B5D497C0070E80E /* Supporting Files */,
 			);
@@ -212,7 +212,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFCB5D3A1B5D49A60070E80E /* LootPageControl.swift in Sources */,
+				AFCB5D3A1B5D49A60070E80E /* SuperPageControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
