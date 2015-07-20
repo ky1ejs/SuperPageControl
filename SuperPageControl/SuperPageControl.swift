@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SuperPageControlDelegate {
+public protocol SuperPageControlDelegate {
     func modeForDot(index: Int, pageControl: SuperPageControl) -> SuperPageControlDotMode
     
     func imageForDotAtIndex(index: Int, pageControl: SuperPageControl) -> UIImage
@@ -20,7 +20,7 @@ protocol SuperPageControlDelegate {
     func selectedColorForDotAtIndex(index: Int, pageControl: SuperPageControl) -> UIColor
 }
 
-enum SuperPageControlDotShape {
+public enum SuperPageControlDotShape {
     case Circle
     case Square
     case Triangle
@@ -35,7 +35,7 @@ enum SuperPageControlDotShape {
 //    }
 //}
 
-enum SuperPageControlDotMode: Equatable {
+public enum SuperPageControlDotMode: Equatable {
     case Image(image: UIImage, selectedImage: UIImage?)
     case Path(path: CGPathRef, selectedPath: CGPathRef?)
     case Shape(shape: SuperPageControlDotShape, selectedShape: SuperPageControlDotShape?)
@@ -43,7 +43,7 @@ enum SuperPageControlDotMode: Equatable {
     case Individual(SuperPageControlDelegate)
 }
 
-func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bool {
+public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bool {
     switch (lhs, rhs) {
         case let (.Image(lhsImage, lhsSelectedImage), .Image(rhsImage, rhsSelectedImage))
         where lhsImage == rhsImage && lhsSelectedImage == rhsSelectedImage:
@@ -63,7 +63,7 @@ func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bool {
     }
 }
 
-@IBDesignable class SuperPageControl: UIControl {
+@IBDesignable public class SuperPageControl: UIControl {
     @IBInspectable var numberOfPages: Int = 1 {
         didSet {
             if numberOfPages != oldValue {
@@ -191,7 +191,7 @@ func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bool {
         self.initialise()
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required public init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.initialise()
     }
@@ -205,7 +205,7 @@ func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bool {
         self.setNeedsDisplay()
     }
     
-    override func drawRect(rect: CGRect) {
+    override public func drawRect(rect: CGRect) {
         self.drawForMode(self.mode)
     }
     
@@ -346,7 +346,7 @@ func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bool {
 //        }
 //    }
     
-    override func endTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) {
+    override public func endTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) {
         let point = touch.locationInView(self)
         let forward = self.vertical ? (point.y > self.frame.size.height / 2) : (point.x > self.frame.size.width / 2)
         self.currentPage = forward ? self.currentPage + 1 : self.currentPage - 1
@@ -358,7 +358,7 @@ func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bool {
         }
     }
     
-    override func sizeThatFits(size: CGSize) -> CGSize {
+    override public func sizeThatFits(size: CGSize) -> CGSize {
         var dotSize = self.sizeForNumberOfPages(self.numberOfPages)
         if let selectedDotSize = self.selectedDotSize {
             let width = selectedDotSize - self.dotSize
@@ -383,7 +383,7 @@ func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bool {
         return dotSize
     }
     
-     override func intrinsicContentSize() -> CGSize {
+     override public func intrinsicContentSize() -> CGSize {
         return self.sizeThatFits(self.bounds.size)
     }
 }
