@@ -264,7 +264,7 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
             switch mode {
             case let .Image(image, selectedImage):
                 let dotImage = (i == self.currentPage && selectedImage != nil) ? selectedImage! : image
-                dotImage.drawInRect(CGRectMake(-dotImage.size.width / 2, -dotImage.size.height / 2, dotImage.size.width, dotImage.size.height))
+                dotImage.drawInRect(CGRectMake(-dotSize / 2, -dotSize / 2, dotSize, dotSize))
                 break
             case let .Path(path, selectedPath):
                 let dotPath = (i == self.currentPage && selectedPath != nil) ? selectedPath! : path
