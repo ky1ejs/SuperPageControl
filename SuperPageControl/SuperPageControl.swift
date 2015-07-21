@@ -68,7 +68,7 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
             return _currentPage
         }
         set {
-            if newValue >= 0 && newValue != _currentPage {
+            if newValue >= 0 && newValue < self.numberOfPages &&  newValue !=  _currentPage {
                 _currentPage = newValue
                 self.setNeedsDisplay()
             }

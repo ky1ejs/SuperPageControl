@@ -29,5 +29,13 @@ class ViewController: UIViewController, SuperPageControlDelegate {
         return .Shape(shape: .Triangle, selectedShape: .Square)
 //        return SuperPageControlDotMode.Image(image: UIImage(named: "Cross")!, selectedImage: UIImage(named: "Tick")!)
     }
+    
+    @IBAction func next(sender: AnyObject) {
+        self.pageControl.currentPage++
+    }
+    
+    @IBAction func previous(sender: AnyObject) {
+        self.pageControl.currentPage--
+    }
 }
 

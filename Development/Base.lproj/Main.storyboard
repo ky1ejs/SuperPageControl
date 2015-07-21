@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -28,13 +29,42 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="njI-25-fZP">
+                                <rect key="frame" x="16" y="550" width="284" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="vbs-oi-g5Z"/>
+                                </constraints>
+                                <state key="normal" title="Previous">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="previous:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="NcL-03-naf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Rp-Zg-hKs">
+                                <rect key="frame" x="300" y="550" width="284" height="50"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="next:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="nr5-rR-pg6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="3Rp-Zg-hKs" firstAttribute="width" secondItem="njI-25-fZP" secondAttribute="width" id="I7v-y5-cEA"/>
+                            <constraint firstItem="3Rp-Zg-hKs" firstAttribute="top" secondItem="njI-25-fZP" secondAttribute="top" id="ImP-Qx-PkM"/>
+                            <constraint firstItem="3Rp-Zg-hKs" firstAttribute="leading" secondItem="njI-25-fZP" secondAttribute="trailing" id="KKa-E7-ooi"/>
+                            <constraint firstItem="3Rp-Zg-hKs" firstAttribute="height" secondItem="njI-25-fZP" secondAttribute="height" id="aeg-oX-9Jw"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="njI-25-fZP" secondAttribute="bottom" id="ggc-FT-PTg"/>
                             <constraint firstAttribute="centerX" secondItem="vJa-YO-0YS" secondAttribute="centerX" constant="-9" id="kOh-2i-rfR"/>
                             <constraint firstItem="vJa-YO-0YS" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="puK-iZ-QAy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="3Rp-Zg-hKs" secondAttribute="trailing" id="uik-cE-utc"/>
+                            <constraint firstItem="njI-25-fZP" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="zMq-rW-N3W"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
                     <connections>
                         <outlet property="pageControl" destination="vJa-YO-0YS" id="NVB-qG-tRI"/>
                     </connections>
