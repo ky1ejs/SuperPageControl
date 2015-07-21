@@ -1,6 +1,5 @@
 //
 //  SuperPageControl.swift
-//  Loot
 //
 //  Created by Kyle McAlpine on 17/07/2015.
 //  Copyright (c) 2015 Kyle McAlpine. All rights reserved.
@@ -10,14 +9,6 @@ import UIKit
 
 public protocol SuperPageControlDelegate {
     func modeForDot(index: Int, pageControl: SuperPageControl) -> SuperPageControlDotMode
-    
-    func imageForDotAtIndex(index: Int, pageControl: SuperPageControl) -> UIImage
-    func shapeForDotAtIndex(index: Int, pageControl: SuperPageControl) -> CGPathRef
-    func colorForDotAtIndex(index: Int, pageControl: SuperPageControl) -> UIColor
-    
-    func selectedImageForDotAtIndex(index: Int, pageControl: SuperPageControl) -> UIImage
-    func selectedShapeForDotAtIndex(index: Int, pageControl: SuperPageControl) -> CGPathRef
-    func selectedColorForDotAtIndex(index: Int, pageControl: SuperPageControl) -> UIColor
 }
 
 public enum SuperPageControlDotShape {
@@ -39,26 +30,26 @@ public enum SuperPageControlDotMode: Equatable {
     case Image(image: UIImage, selectedImage: UIImage?)
     case Path(path: CGPathRef, selectedPath: CGPathRef?)
     case Shape(shape: SuperPageControlDotShape, selectedShape: SuperPageControlDotShape?)
-//    case Individual(WeakBox<ImagePageControlDelegate>)
+    //    case Individual(WeakBox<ImagePageControlDelegate>)
     case Individual(SuperPageControlDelegate)
 }
 
 public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bool {
     switch (lhs, rhs) {
-        case let (.Image(lhsImage, lhsSelectedImage), .Image(rhsImage, rhsSelectedImage))
+    case let (.Image(lhsImage, lhsSelectedImage), .Image(rhsImage, rhsSelectedImage))
         where lhsImage == rhsImage && lhsSelectedImage == rhsSelectedImage:
         return true
-        case let (.Path(lhsPath, lhsSelectedPath), .Path(rhsPath, rhsSelectedPath))
+    case let (.Path(lhsPath, lhsSelectedPath), .Path(rhsPath, rhsSelectedPath))
         where lhsPath === rhsPath && lhsSelectedPath === rhsSelectedPath:
         return true
-        case let (.Shape(lhsShape, lhsSelectedShape), .Shape(rhsShape, rhsSelectedShape))
+    case let (.Shape(lhsShape, lhsSelectedShape), .Shape(rhsShape, rhsSelectedShape))
         where lhsShape == rhsShape && lhsSelectedShape == rhsSelectedShape:
         return true
     case (.Individual, .Individual):
         // Comparing the delegate is hard. Can't make it Equatable as it then can't be used with enums
         // Will come back to this... Famous last words..
         return true
-        default:
+    default:
         return false
     }
 }
@@ -86,7 +77,7 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
             }
         }
     }
-//    @property (nonatomic, assign, getter = isWrapEnabled) IBInspectable BOOL wrapEnabled;
+    //    @property (nonatomic, assign, getter = isWrapEnabled) IBInspectable BOOL wrapEnabled;
     @IBInspectable public var vertical: Bool = false {
         didSet {
             if vertical != oldValue {
@@ -95,6 +86,13 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
         }
     }
     
+    public var mode = SuperPageControlDotMode.Shape(shape: .Circle, selectedShape: nil) {
+        didSet {
+            if mode != oldValue {
+                self.setNeedsDisplay()
+            }
+        }
+    }
     @IBInspectable public var dotSpaceing: CGFloat = 10 {
         didSet {
             if dotSpaceing != oldValue {
@@ -112,13 +110,6 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
     @IBInspectable public var dotShadowOffset: CGSize = CGSizeMake(0, 1) {
         didSet {
             if dotShadowOffset != oldValue {
-                self.setNeedsDisplay()
-            }
-        }
-    }
-    public var mode = SuperPageControlDotMode.Shape(shape: .Circle, selectedShape: nil) {
-        didSet {
-            if mode != oldValue {
                 self.setNeedsDisplay()
             }
         }
@@ -265,11 +256,7 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
             let offset = (self.dotSize + self.dotSpaceing) * CGFloat(i) + self.dotSize / 2
             CGContextTranslateCTM(context, self.vertical ? 0 : offset, self.vertical ? offset : 0);
             
-            if dotShadowColor !=  .clearColor() {
-                CGContextSetShadowWithColor(context, dotShadowOffset, dotShadowBlur, dotShadowColor.CGColor);
-            }
-            
-            switch self.mode {
+            switch mode {
             case let .Image(image, selectedImage):
                 let dotImage = (i == self.currentPage && selectedImage != nil) ? selectedImage! : image
                 dotImage.drawInRect(CGRectMake(-dotImage.size.width / 2, -dotImage.size.height / 2, dotImage.size.width, dotImage.size.height))
@@ -281,6 +268,10 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
                 CGContextFillPath(context)
                 break
             case let .Shape(shape, selectedShape):
+                if dotShadowColor !=  .clearColor() {
+                    CGContextSetShadowWithColor(context, dotShadowOffset, dotShadowBlur, dotShadowColor.CGColor);
+                }
+                
                 let dotShape = (i == self.currentPage && selectedShape != nil) ? selectedShape! : shape
                 if i == self.currentPage {
                     self.selectedDotColor.setFill()
@@ -289,7 +280,7 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
                 } else {
                     self.selectedDotColor.colorWithAlphaComponent(0.25).setFill()
                 }
-                switch shape {
+                switch dotShape {
                 case .Circle:
                     CGContextFillEllipseInRect(context, CGRectMake(-dotSize / 2, -dotSize / 2, dotSize, dotSize));
                     break
@@ -314,37 +305,6 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
             break
         }
     }
-
-    // Don't think I need these. Will come back later.
-//    func drawImage(image: UIImage) {
-//        image.drawInRect(CGRectMake(-image.size.width / 2, -image.size.height / 2, image.size.width, image.size.height))
-//    }
-//    
-//    func drawPath(path: CGPathRef, context: CGContextRef) {
-//        CGContextBeginPath(context);
-//        CGContextAddPath(context, path);
-//        CGContextFillPath(context);
-//    }
-//    
-//    func drawShape(shape: ImagePageControlDotShape, size: CGFloat, color: UIColor, context: CGContextRef) {
-//        color.setFill()
-//        switch shape {
-//        case .Circle:
-//            CGContextFillEllipseInRect(context, CGRectMake(-size / 2, -size / 2, size, size));
-//            break
-//        case .Square:
-//            CGContextFillRect(context, CGRectMake(-size / 2, -size / 2, size, size));
-//            break
-//        case .Triangle:
-//            CGContextBeginPath(context);
-//            CGContextMoveToPoint(context, 0, -size / 2);
-//            CGContextAddLineToPoint(context, size / 2, size / 2);
-//            CGContextAddLineToPoint(context, -size / 2, size / 2);
-//            CGContextAddLineToPoint(context, 0, -size / 2);
-//            CGContextFillPath(context);
-//            break
-//        }
-//    }
     
     override public func endTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) {
         let point = touch.locationInView(self)
@@ -383,7 +343,7 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
         return dotSize
     }
     
-     override public func intrinsicContentSize() -> CGSize {
+    override public func intrinsicContentSize() -> CGSize {
         return self.sizeThatFits(self.bounds.size)
     }
 }
