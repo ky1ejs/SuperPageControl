@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vJa-YO-0YS" customClass="SuperPageControl" customModule="SuperPageControl">
-                                <rect key="frame" x="264" y="28" width="90" height="10"/>
+                                <rect key="frame" x="238" y="40" width="125" height="17"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="numberOfPages">
@@ -26,6 +26,9 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="currentPage">
                                         <integer key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="dotSize">
+                                        <real key="value" value="17"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -58,8 +61,8 @@
                             <constraint firstItem="3Rp-Zg-hKs" firstAttribute="leading" secondItem="njI-25-fZP" secondAttribute="trailing" id="KKa-E7-ooi"/>
                             <constraint firstItem="3Rp-Zg-hKs" firstAttribute="height" secondItem="njI-25-fZP" secondAttribute="height" id="aeg-oX-9Jw"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="njI-25-fZP" secondAttribute="bottom" id="ggc-FT-PTg"/>
-                            <constraint firstAttribute="centerX" secondItem="vJa-YO-0YS" secondAttribute="centerX" constant="-9" id="kOh-2i-rfR"/>
-                            <constraint firstItem="vJa-YO-0YS" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="puK-iZ-QAy"/>
+                            <constraint firstAttribute="centerX" secondItem="vJa-YO-0YS" secondAttribute="centerX" id="kOh-2i-rfR"/>
+                            <constraint firstItem="vJa-YO-0YS" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="20" id="puK-iZ-QAy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3Rp-Zg-hKs" secondAttribute="trailing" id="uik-cE-utc"/>
                             <constraint firstItem="njI-25-fZP" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="zMq-rW-N3W"/>
                         </constraints>

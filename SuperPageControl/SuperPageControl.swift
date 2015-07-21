@@ -17,42 +17,73 @@ public enum SuperPageControlDotShape {
     case Triangle
 }
 
+public typealias Shadow = (size: CGFloat, offset: CGSize, color: UIColor, blur: CGFloat)
+
+public struct SuperPageControlShapeConfiguation {
+    let shape: SuperPageControlDotShape
+    var color: UIColor?                             // Set to 0.25 alpha of selectedColor if nil
+    var shadow: Shadow?                             // Optional, no shadow if nil
+    var selectedShape: SuperPageControlDotShape?    // Falls back on shape
+    var selectedColor: UIColor = UIColor.blackColor()
+    var selectedShadow: Shadow?                     // Falls back on shadow
+    
+    public init(shape: SuperPageControlDotShape) {
+        self.shape = shape
+    }
+}
+
+public struct SuperPageControlImageConfiguration {
+    public let image: UIImage
+    public var tintColor: UIColor?             // No tint color if not set
+    public var selectedImage: UIImage?         // Falls back on image
+    public var selectedTintColor: UIColor?     // Falls back on tintColor
+    
+    public init(image: UIImage) {
+        self.image = image
+    }
+}
+
+public enum SuperPageControlDotMode: Equatable {
+    case Image(SuperPageControlImageConfiguration)
+    case Path(path: CGPathRef, selectedPath: CGPathRef?)
+    case Shape(SuperPageControlShapeConfiguation)
+    //    case Individual(WeakBox<ImagePageControlDelegate>)
+    case Individual(SuperPageControlDelegate)
+    
+    // Helper to calculate size
+    private func shadowsForPageControl(pageControl: SuperPageControl) -> [Shadow]? {
+        switch self {
+        case let .Shape(shapeConfig):
+            var shadows = [Shadow]()
+            if let shadow = shapeConfig.shadow {
+                shadows.append(shadow)
+            }
+            if let selectedShadow = shapeConfig.selectedShadow {
+                shadows.append(selectedShadow)
+            }
+            return (shadows.count > 0) ? shadows : nil
+        case let .Individual(delegate):
+            var shadows = [Shadow]()
+            for i in 0...pageControl.numberOfPages - 1 {
+                if let shadowsForPage = delegate.modeForDot(i, pageControl: pageControl).shadowsForPageControl(pageControl) {
+                    shadows += shadowsForPage
+                }
+            }
+            return (shadows.count > 0) ? shadows : nil
+        default:
+            return nil
+        }
+    }
+}
+
 //final class WeakBox<T: AnyObject> {
 //    // weak variable must be optional in case it gets deallocated
 //    weak private(set) var value: T?
-//    
+//
 //    init(_ value: T) {
 //        self.value = value
 //    }
 //}
-
-public enum SuperPageControlDotMode: Equatable {
-    case Image(image: UIImage, selectedImage: UIImage?)
-    case Path(path: CGPathRef, selectedPath: CGPathRef?)
-    case Shape(shape: SuperPageControlDotShape, selectedShape: SuperPageControlDotShape?)
-    //    case Individual(WeakBox<ImagePageControlDelegate>)
-    case Individual(SuperPageControlDelegate)
-}
-
-public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bool {
-    switch (lhs, rhs) {
-    case let (.Image(lhsImage, lhsSelectedImage), .Image(rhsImage, rhsSelectedImage))
-        where lhsImage == rhsImage && lhsSelectedImage == rhsSelectedImage:
-        return true
-    case let (.Path(lhsPath, lhsSelectedPath), .Path(rhsPath, rhsSelectedPath))
-        where lhsPath === rhsPath && lhsSelectedPath === rhsSelectedPath:
-        return true
-    case let (.Shape(lhsShape, lhsSelectedShape), .Shape(rhsShape, rhsSelectedShape))
-        where lhsShape == rhsShape && lhsSelectedShape == rhsSelectedShape:
-        return true
-    case (.Individual, .Individual):
-        // Comparing the delegate is hard. Can't make it Equatable as it then can't be used with enums
-        // Will come back to this... Famous last words..
-        return true
-    default:
-        return false
-    }
-}
 
 @IBDesignable public class SuperPageControl: UIControl {
     @IBInspectable public var numberOfPages: Int = 1 {
@@ -91,11 +122,14 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
         }
     }
     
-    public var mode = SuperPageControlDotMode.Shape(shape: .Circle, selectedShape: nil) {
+    public var mode = SuperPageControlDotMode.Shape(SuperPageControlShapeConfiguation(shape: .Circle)) {
         didSet {
-            if mode != oldValue {
+            // TODO: check equality when setting .Individual cases bad access
+            // unless you stick a break point in the SuperPageControlDotMode
+            // == function
+//            if mode != oldValue {
                 self.setNeedsDisplay()
-            }
+//            }
         }
     }
     @IBInspectable public var dotSpaceing: CGFloat = 10 {
@@ -112,66 +146,9 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
             }
         }
     }
-    @IBInspectable public var dotShadowOffset: CGSize = CGSizeMake(0, 1) {
-        didSet {
-            if dotShadowOffset != oldValue {
-                self.setNeedsDisplay()
-            }
-        }
-    }
-    @IBInspectable public var dotColor: UIColor? {
-        didSet {
-            if dotColor != oldValue {
-                self.setNeedsDisplay()
-            }
-        }
-    }
-    @IBInspectable public var dotShadowColor: UIColor = .clearColor() {
-        didSet {
-            if dotShadowColor != oldValue {
-                self.setNeedsDisplay()
-            }
-        }
-    }
-    @IBInspectable public var dotShadowBlur: CGFloat = 0 {
-        didSet {
-            if dotShadowBlur != oldValue {
-                self.setNeedsDisplay()
-            }
-        }
-    }
-    
     @IBInspectable public var selectedDotSize: CGFloat? {
         didSet {
             if selectedDotSize != oldValue {
-                self.setNeedsDisplay()
-            }
-        }
-    }
-    @IBInspectable public var selectedDotColor: UIColor = .blackColor() {
-        didSet {
-            if selectedDotColor != oldValue {
-                self.setNeedsDisplay()
-            }
-        }
-    }
-    @IBInspectable public var selectedDotShadowColor: UIColor? {
-        didSet {
-            if selectedDotShadowColor != oldValue {
-                self.setNeedsDisplay()
-            }
-        }
-    }
-    @IBInspectable public var selectedDotShadowBlur: CGFloat? {
-        didSet {
-            if selectedDotShadowBlur != oldValue {
-                self.setNeedsDisplay()
-            }
-        }
-    }
-    @IBInspectable public var selectedDotShadowOffset: CGSize? {
-        didSet {
-            if selectedDotShadowOffset != oldValue {
                 self.setNeedsDisplay()
             }
         }
@@ -237,54 +214,49 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
         case .Individual:
             self.drawForMode(mode)
         default:
-            var dotSize = self.dotSize
-            var dotShadowColor = self.dotShadowColor
-            var dotShadowOffset = self.dotShadowOffset
-            var dotShadowBlur = self.dotShadowBlur
-            if i == self.currentPage {
-                if let selectedDotSize = self.selectedDotSize {
-                    dotSize = selectedDotSize
-                }
-                if let selectedDotShadowColor = self.selectedDotShadowColor {
-                    dotShadowColor = selectedDotShadowColor
-                }
-                if let selectedDotShadowOffset = self.selectedDotShadowOffset {
-                    dotShadowOffset = selectedDotShadowOffset
-                }
-                if let selectedDotShadowBlur = self.selectedDotShadowBlur {
-                    dotShadowBlur = selectedDotShadowBlur
-                }
-            }
-            
             // Offset for dot i
             CGContextSaveGState(context)
             let offset = (self.dotSize + self.dotSpaceing) * CGFloat(i) + self.dotSize / 2
             CGContextTranslateCTM(context, self.vertical ? 0 : offset, self.vertical ? offset : 0);
             
             switch mode {
-            case let .Image(image, selectedImage):
-                let dotImage = (i == self.currentPage && selectedImage != nil) ? selectedImage! : image
+            case let .Image(imageConfig):
+                var dotImage = imageConfig.image
+                var tint = imageConfig.tintColor
+                if i == self.currentPage {
+                    if let selectedImage = imageConfig.selectedImage {
+                        dotImage = selectedImage
+                    }
+                    tint = imageConfig.selectedTintColor
+                }
+                if tint != nil {
+                    dotImage = dotImage.tintWithColor(tint!)
+                }
                 dotImage.drawInRect(CGRectMake(-dotSize / 2, -dotSize / 2, dotSize, dotSize))
                 break
             case let .Path(path, selectedPath):
-                let dotPath = (i == self.currentPage && selectedPath != nil) ? selectedPath! : path
+                let dotPath = (i == self.currentPage) ? selectedPath ?? path : path
                 CGContextBeginPath(context)
                 CGContextAddPath(context, dotPath)
                 CGContextFillPath(context)
                 break
-            case let .Shape(shape, selectedShape):
-                if dotShadowColor !=  .clearColor() {
-                    CGContextSetShadowWithColor(context, dotShadowOffset, dotShadowBlur, dotShadowColor.CGColor);
+            case let .Shape(shapeConfig):
+                if i == self.currentPage, let shadow = shapeConfig.selectedShadow where shadow.color != .clearColor() {
+                    CGContextSetShadowWithColor(context, shadow.offset, shadow.blur, shadow.color.CGColor)
+                } else if let shadow = shapeConfig.shadow where shadow.color != .clearColor() {
+                    CGContextSetShadowWithColor(context, shadow.offset, shadow.blur, shadow.color.CGColor)
                 }
                 
-                let dotShape = (i == self.currentPage && selectedShape != nil) ? selectedShape! : shape
                 if i == self.currentPage {
-                    self.selectedDotColor.setFill()
-                } else if let dotColor = self.dotColor {
+                    shapeConfig.selectedColor.setFill()
+                } else if let dotColor = shapeConfig.color {
                     dotColor.setFill()
                 } else {
-                    self.selectedDotColor.colorWithAlphaComponent(0.25).setFill()
+                    shapeConfig.selectedColor.colorWithAlphaComponent(0.25).setFill()
                 }
+                
+                let dotSize = (i == self.currentPage) ? self.selectedDotSize ?? self.dotSize : self.dotSize
+                let dotShape = (i == self.currentPage) ? shapeConfig.selectedShape ?? shapeConfig.shape : shapeConfig.shape
                 switch dotShape {
                 case .Circle:
                     CGContextFillEllipseInRect(context, CGRectMake(-dotSize / 2, -dotSize / 2, dotSize, dotSize));
@@ -335,18 +307,16 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
             dotSize.height = self.vertical ? dotSize.height + width : height
         }
         
-        var dotShadowOffset = (self.dotShadowColor != .clearColor()) ? self.dotShadowOffset : CGSizeZero
-        var dotShadowBlur = (self.dotShadowColor != .clearColor()) ? self.dotShadowBlur : 0
-        if let selectedDotShadowColor = self.selectedDotShadowColor where selectedDotShadowColor != .clearColor() {
-            if let selectedDotShadowOffset = self.selectedDotShadowOffset {
-                dotShadowOffset = CGSizeMake(max(dotShadowOffset.width, selectedDotShadowOffset.width), max(dotShadowOffset.height, selectedDotShadowOffset.height))
+        if let shadows = self.mode.shadowsForPageControl(self) {
+            var shadowOffset = CGSizeZero
+            var shadowBlur: CGFloat = 0
+            for shadow in shadows {
+                shadowOffset = CGSizeMake(max(shadowOffset.width, shadow.offset.width), max(shadowOffset.height, shadow.offset.height))
+                shadowBlur = max(shadowBlur, shadow.blur)
             }
-            if let selectedDotShadowBlur = self.selectedDotShadowBlur {
-                dotShadowBlur = max(dotShadowBlur, selectedDotShadowBlur)
-            }
+            dotSize.width += (shadowOffset.width * 2) + (shadowBlur * 2)
+            dotSize.height += (shadowOffset.height * 2) + (shadowBlur * 2)
         }
-        dotSize.width += (dotShadowOffset.width * 2) + (dotShadowBlur * 2)
-        dotSize.height += (dotShadowOffset.height * 2) + (dotShadowBlur * 2)
         
         return dotSize
     }
@@ -354,4 +324,79 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
     override public func intrinsicContentSize() -> CGSize {
         return self.sizeThatFits(self.bounds.size)
     }
+}
+
+extension UIImage {
+    func tintWithColor(color: UIColor) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
+        let context = UIGraphicsGetCurrentContext()
+        CGContextSaveGState(context)
+        CGContextTranslateCTM(context, 0, self.size.height)
+        CGContextScaleCTM(context, 1.0, -1.0)
+        CGContextSetBlendMode(context, kCGBlendModeNormal)
+        let rect = CGRectMake(0, 0, self.size.width, self.size.height)
+        CGContextClipToMask(context, rect, self.CGImage)
+        color.setFill()
+        CGContextFillRect(context, rect);
+        let newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        CGContextRestoreGState(context)
+        return newImage;
+    }
+}
+public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bool {
+    switch (lhs, rhs) {
+    case let (.Image(lhsImageConfig), .Image(rhsImageConfig))
+        where lhsImageConfig == rhsImageConfig:
+        return true
+    case let (.Path(lhsPath, lhsSelectedPath), .Path(rhsPath, rhsSelectedPath))
+        where lhsPath === rhsPath && lhsSelectedPath === rhsSelectedPath:
+        return true
+    case let (.Shape(lhsShapeConfig), .Shape(rhsShapeConfig))
+        where lhsShapeConfig == lhsShapeConfig:
+        return true
+    case (.Individual, .Individual):
+        // Comparing the delegate is hard. Can't make it Equatable as it then can't be used with enums
+        // Will come back to this... Famous last words..
+        return true
+    default:
+        return false
+    }
+}
+
+public func ==(lhs: SuperPageControlShapeConfiguation, rhs: SuperPageControlShapeConfiguation) -> Bool {
+    if (lhs.shadow == nil && rhs.shadow != nil)
+        || (lhs.shadow != nil && rhs.shadow == nil)
+        || (lhs.selectedShadow == nil && rhs.selectedShadow != nil)
+        || (lhs.selectedShadow != nil && rhs.selectedShadow == nil) {
+        return false
+    }
+    if let lhsShadow = lhs.shadow, rhsShadow = rhs.shadow {
+        if !(lhsShadow == rhsShadow) {
+            return false
+        }
+    }
+    if let lhsSelectedShadow = lhs.selectedShadow, rhsSelectedShadow = rhs.selectedShadow {
+        if !(lhsSelectedShadow == rhsSelectedShadow) {
+            return false
+        }
+    }
+    return lhs.shape == rhs.shape
+        && lhs.color == rhs.color
+        && lhs.selectedShape == rhs.selectedShape
+        && lhs.selectedColor == rhs.selectedColor
+}
+
+public func ==(lhs: SuperPageControlImageConfiguration, rhs: SuperPageControlImageConfiguration) -> Bool {
+    return lhs.image == rhs.image
+    && lhs.selectedImage == rhs.selectedImage
+    && lhs.selectedTintColor == rhs.selectedTintColor
+        && lhs.tintColor == rhs.tintColor
+}
+
+func == <T:Equatable, T2:Equatable, T3:Equatable, T4:Equatable> (lhs: (T,T2,T3,T4), rhs: (T,T2,T3,T4)) -> Bool {
+    return lhs.0 == rhs.0 &&
+        lhs.1 == rhs.1 &&
+        lhs.2 == rhs.2 &&
+        lhs.3 == rhs.3
 }

@@ -26,8 +26,15 @@ class ViewController: UIViewController, SuperPageControlDelegate {
     }
 
     func modeForDot(index: Int, pageControl: SuperPageControl) -> SuperPageControlDotMode {
-        return .Shape(shape: .Triangle, selectedShape: .Square)
-//        return SuperPageControlDotMode.Image(image: UIImage(named: "Cross")!, selectedImage: UIImage(named: "Tick")!)
+//        return .Shape(shape: .Triangle, selectedShape: .Square)
+        var image = UIImage(named: "Cross")!
+        if index == 0 {
+           image = UIImage(named: "InfoDot")!
+        }
+        var imageConfig = SuperPageControlImageConfiguration(image: image)
+        imageConfig.selectedImage = UIImage(named: "Tick")!
+        imageConfig.tintColor = UIColor.purpleColor()
+        return .Image(imageConfig)
     }
     
     @IBAction func next(sender: AnyObject) {
