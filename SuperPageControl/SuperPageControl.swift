@@ -20,12 +20,12 @@ public enum SuperPageControlDotShape {
 public typealias Shadow = (size: CGFloat, offset: CGSize, color: UIColor, blur: CGFloat)
 
 public struct SuperPageControlShapeConfiguation {
-    let shape: SuperPageControlDotShape
-    var color: UIColor?                             // Set to 0.25 alpha of selectedColor if nil
-    var shadow: Shadow?                             // Optional, no shadow if nil
-    var selectedShape: SuperPageControlDotShape?    // Falls back on shape
-    var selectedColor: UIColor = UIColor.blackColor()
-    var selectedShadow: Shadow?                     // Falls back on shadow
+    public let shape: SuperPageControlDotShape
+    public var color: UIColor?                      // Set to 0.25 alpha of selectedColor if nil
+    public var shadow: Shadow?                             // Optional, no shadow if nil
+    public var selectedShape: SuperPageControlDotShape?    // Falls back on shape
+    public var selectedColor: UIColor = UIColor.blackColor()
+    public var selectedShadow: Shadow?                     // Falls back on shadow
     
     public init(shape: SuperPageControlDotShape) {
         self.shape = shape
