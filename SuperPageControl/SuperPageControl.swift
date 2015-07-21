@@ -62,9 +62,14 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
             }
         }
     }
-    @IBInspectable public var currentPage: Int = 1 {
-        didSet {
-            if currentPage != oldValue {
+    private var _currentPage = 1
+    @IBInspectable public var currentPage: Int {
+        get {
+            return _currentPage
+        }
+        set {
+            if newValue >= 0 && newValue != _currentPage {
+                _currentPage = newValue
                 self.setNeedsDisplay()
             }
         }
@@ -309,12 +314,15 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
     override public func endTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) {
         let point = touch.locationInView(self)
         let forward = self.vertical ? (point.y > self.frame.size.height / 2) : (point.x > self.frame.size.width / 2)
-        self.currentPage = forward ? self.currentPage + 1 : self.currentPage - 1
-        if !self.defersCurrentPageDisplay {
-            self.setNeedsDisplay()
-        } else {
-            self.sendActionsForControlEvents(.ValueChanged)
-            super.endTrackingWithTouch(touch, withEvent: event)
+        let newPage = forward ? self.currentPage + 1 : self.currentPage - 1
+        if newPage >= 0 && newPage < self.numberOfPages {
+            _currentPage = newPage
+            if !self.defersCurrentPageDisplay {
+                self.setNeedsDisplay()
+            } else {
+                self.sendActionsForControlEvents(.ValueChanged)
+                super.endTrackingWithTouch(touch, withEvent: event)
+            }
         }
     }
     
