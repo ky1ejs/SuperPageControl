@@ -7,10 +7,6 @@
 
 import UIKit
 
-public protocol SuperPageControlDelegate {
-    func modeForDot(index: Int, pageControl: SuperPageControl) -> SuperPageControlDotMode
-}
-
 public enum SuperPageControlDotShape {
     case Circle
     case Square
@@ -47,12 +43,14 @@ public struct SuperPageControlImageConfiguration {
     }
 }
 
+public typealias DotModeGenerator = (index: Int, pageControl: SuperPageControl) -> SuperPageControlDotMode
+
 public enum SuperPageControlDotMode: Equatable {
     case Image(SuperPageControlImageConfiguration)
     case Path(path: CGPathRef, selectedPath: CGPathRef?)
     case Shape(SuperPageControlShapeConfiguation)
     //    case Individual(WeakBox<ImagePageControlDelegate>)
-    case Individual(SuperPageControlDelegate)
+    case Individual(DotModeGenerator)
     
     // Helper to calculate size
     private func shadowsForPageControl(pageControl: SuperPageControl) -> [Shadow]? {
@@ -66,10 +64,10 @@ public enum SuperPageControlDotMode: Equatable {
                 shadows.append(selectedShadow)
             }
             return (shadows.count > 0) ? shadows : nil
-        case let .Individual(delegate):
+        case let .Individual(generator):
             var shadows = [Shadow]()
             for i in 0...pageControl.numberOfPages - 1 {
-                if let shadowsForPage = delegate.modeForDot(i, pageControl: pageControl).shadowsForPageControl(pageControl) {
+                if let shadowsForPage = generator(index: i, pageControl: pageControl).shadowsForPageControl(pageControl) {
                     shadows += shadowsForPage
                 }
             }
@@ -199,9 +197,9 @@ public enum SuperPageControlDotMode: Equatable {
             
             // Change to if statement when Swift 2.0 brings switch's pattern matching to if
             switch self.mode {
-            case let .Individual(delegate):
+            case let .Individual(generator):
                 for i in 0...self.numberOfPages - 1 {
-                    self.drawDot(delegate.modeForDot(i, pageControl: self), atIndex: i, context: context)
+                    self.drawDot(generator(index: i, pageControl: self), atIndex: i, context: context)
                 }
                 break
             default:

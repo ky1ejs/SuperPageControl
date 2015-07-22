@@ -9,13 +9,24 @@
 import UIKit
 import SuperPageControl
 
-class ViewController: UIViewController, SuperPageControlDelegate {
+class ViewController: UIViewController {
     @IBOutlet weak var pageControl: SuperPageControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.pageControl.mode = self.modeForDot(1, pageControl: self.pageControl)
-        self.pageControl.mode = .Individual(self)
+        self.pageControl.mode = SuperPageControlDotMode.Individual({ (index, pageControl) -> SuperPageControlDotMode in
+            var image = UIImage(named: "Cross")!
+            if index == 0 {
+                image = UIImage(named: "InfoDot")!
+            }
+            self.pageControl.selectedDotSize = 20
+            return .Shape(SuperPageControlShapeConfiguation(shape: .Circle))
+            //        var imageConfig = SuperPageControlImageConfiguration(image: image)
+            //        imageConfig.selectedImage = UIImage(named: "Tick")!
+            //        imageConfig.tintColor = UIColor.purpleColor()
+            //        return .Image(imageConfig)
+        })
 //        self.pageControl.mode = .Image(image: UIImage(named: "Cross")!, selectedImage: UIImage(named: "Tick")!)
         // Do any additional setup after loading the view, typically from a nib.
     }
@@ -23,18 +34,6 @@ class ViewController: UIViewController, SuperPageControlDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    func modeForDot(index: Int, pageControl: SuperPageControl) -> SuperPageControlDotMode {
-//        return .Shape(shape: .Triangle, selectedShape: .Square)
-        var image = UIImage(named: "Cross")!
-        if index == 0 {
-           image = UIImage(named: "InfoDot")!
-        }
-        var imageConfig = SuperPageControlImageConfiguration(image: image)
-        imageConfig.selectedImage = UIImage(named: "Tick")!
-        imageConfig.tintColor = UIColor.purpleColor()
-        return .Image(imageConfig)
     }
     
     @IBAction func next(sender: AnyObject) {
