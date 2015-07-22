@@ -21,11 +21,13 @@ public typealias Shadow = (size: CGFloat, offset: CGSize, color: UIColor, blur: 
 
 public struct SuperPageControlShapeConfiguation {
     public let shape: SuperPageControlDotShape
-    public var color: UIColor?                      // Set to 0.25 alpha of selectedColor if nil
-    public var shadow: Shadow?                             // Optional, no shadow if nil
-    public var selectedShape: SuperPageControlDotShape?    // Falls back on shape
+    public var color: UIColor?                                  // Set to 0.25 alpha of selectedColor if nil
+    public var shadow: Shadow?                                  // Optional, no shadow if nil
+    public var size: CGSize?                                    // Falls back on global size
+    public var selectedShape: SuperPageControlDotShape?         // Falls back on shape
     public var selectedColor: UIColor = UIColor.blackColor()
-    public var selectedShadow: Shadow?                     // Falls back on shadow
+    public var selectedShadow: Shadow?                          // Falls back on shadow
+    public var selectedSize: CGSize?                            // Falls back on size
     
     public init(shape: SuperPageControlDotShape) {
         self.shape = shape
@@ -34,9 +36,11 @@ public struct SuperPageControlShapeConfiguation {
 
 public struct SuperPageControlImageConfiguration {
     public let image: UIImage
-    public var tintColor: UIColor?             // No tint color if not set
-    public var selectedImage: UIImage?         // Falls back on image
-    public var selectedTintColor: UIColor?     // Falls back on tintColor
+    public var tintColor: UIColor?          // No tint color if not set
+    public var size: CGSize?                // Falls back on global size
+    public var selectedImage: UIImage?      // Falls back on image
+    public var selectedTintColor: UIColor?  // Falls back on tintColor
+    public var selectedSize: CGSize?        // Falls back on size
     
     public init(image: UIImage) {
         self.image = image
