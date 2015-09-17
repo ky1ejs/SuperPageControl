@@ -166,7 +166,7 @@ public enum SuperPageControlDotMode: Equatable {
         self.initialise()
     }
 
-    required public init(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.initialise()
     }
@@ -285,7 +285,7 @@ public enum SuperPageControlDotMode: Equatable {
         }
     }
     
-    override public func endTrackingWithTouch(touch: UITouch, withEvent event: UIEvent) {
+    override public func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
         let point = touch.locationInView(self)
         let forward = self.vertical ? (point.y > self.frame.size.height / 2) : (point.x > self.frame.size.width / 2)
         let newPage = forward ? self.currentPage + 1 : self.currentPage - 1
@@ -335,7 +335,7 @@ extension UIImage {
         CGContextSaveGState(context)
         CGContextTranslateCTM(context, 0, self.size.height)
         CGContextScaleCTM(context, 1.0, -1.0)
-        CGContextSetBlendMode(context, kCGBlendModeNormal)
+        CGContextSetBlendMode(context, CGBlendMode.Normal)
         let rect = CGRectMake(0, 0, self.size.width, self.size.height)
         CGContextClipToMask(context, rect, self.CGImage)
         color.setFill()
