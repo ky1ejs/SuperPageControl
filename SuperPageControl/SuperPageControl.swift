@@ -187,7 +187,7 @@ public enum SuperPageControlDotMode: Equatable {
     func drawForMode(mode: SuperPageControlDotMode) {
         if self.numberOfPages > 1 || !self.hidesForSinglePage {
             
-            let context = UIGraphicsGetCurrentContext()
+            let context = UIGraphicsGetCurrentContext()!
             let size = self.sizeForNumberOfPages(self.numberOfPages)
             if self.vertical {
                 CGContextTranslateCTM(context, self.frame.size.width / 2, (self.frame.size.height - size.height) / 2)
@@ -286,16 +286,18 @@ public enum SuperPageControlDotMode: Equatable {
     }
     
     override public func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
-        let point = touch.locationInView(self)
-        let forward = self.vertical ? (point.y > self.frame.size.height / 2) : (point.x > self.frame.size.width / 2)
-        let newPage = forward ? self.currentPage + 1 : self.currentPage - 1
-        if newPage >= 0 && newPage < self.numberOfPages {
-            _currentPage = newPage
-            if !self.defersCurrentPageDisplay {
-                self.setNeedsDisplay()
-            } else {
-                self.sendActionsForControlEvents(.ValueChanged)
-                super.endTrackingWithTouch(touch, withEvent: event)
+        if let touch = touch {
+            let point = touch.locationInView(self)
+            let forward = self.vertical ? (point.y > self.frame.size.height / 2) : (point.x > self.frame.size.width / 2)
+            let newPage = forward ? self.currentPage + 1 : self.currentPage - 1
+            if newPage >= 0 && newPage < self.numberOfPages {
+                _currentPage = newPage
+                if !self.defersCurrentPageDisplay {
+                    self.setNeedsDisplay()
+                } else {
+                    self.sendActionsForControlEvents(.ValueChanged)
+                    super.endTrackingWithTouch(touch, withEvent: event)
+                }
             }
         }
     }
@@ -355,7 +357,7 @@ public func ==(lhs: SuperPageControlDotMode, rhs: SuperPageControlDotMode) -> Bo
         where lhsPath === rhsPath && lhsSelectedPath === rhsSelectedPath:
         return true
     case let (.Shape(lhsShapeConfig), .Shape(rhsShapeConfig))
-        where lhsShapeConfig == lhsShapeConfig:
+        where lhsShapeConfig == rhsShapeConfig:
         return true
     case (.Individual, .Individual):
         // Comparing the delegate is hard. Can't make it Equatable as it then can't be used with enums
