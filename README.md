@@ -1,4 +1,3 @@
-This project is a re-write of Nick Lockwood's [FXPageControl](https://github.com/nicklockwood/FXPageControl) in Swift – awaiting his blessing.
 
 SuperPageControl is a replacement for UIPageControl that gives:
 
