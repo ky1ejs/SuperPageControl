@@ -5,6 +5,8 @@ SuperPageControl is a replacement for UIPageControl that gives:
 - CGPaths
 - Granular control over each dot
 
+**Swift 2 since v0.3**
+
 
 ### Carthage
 
