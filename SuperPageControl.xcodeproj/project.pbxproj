@@ -12,30 +12,13 @@
 		AF7121FF1B5D98ED00E237DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF7121FD1B5D98ED00E237DE /* Main.storyboard */; };
 		AF7122011B5D98ED00E237DE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AF7122001B5D98ED00E237DE /* Images.xcassets */; };
 		AF7122041B5D98ED00E237DE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF7122021B5D98ED00E237DE /* LaunchScreen.xib */; };
-		AF7122101B5D98ED00E237DE /* DevelopmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF71220F1B5D98ED00E237DE /* DevelopmentTests.swift */; };
 		AF7122191B5D991000E237DE /* SuperPageControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFCB5D1D1B5D497C0070E80E /* SuperPageControl.framework */; };
 		AFCB5D231B5D497C0070E80E /* SuperPageControl.h in Headers */ = {isa = PBXBuildFile; fileRef = AFCB5D221B5D497C0070E80E /* SuperPageControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AFCB5D291B5D497D0070E80E /* SuperPageControl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFCB5D1D1B5D497C0070E80E /* SuperPageControl.framework */; };
-		AFCB5D301B5D497D0070E80E /* SuperPageControlTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCB5D2F1B5D497D0070E80E /* SuperPageControlTests.swift */; };
 		AFCB5D3A1B5D49A60070E80E /* SuperPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCB5D391B5D49A60070E80E /* SuperPageControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		AF71220A1B5D98ED00E237DE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AFCB5D141B5D497C0070E80E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AF7121F41B5D98ED00E237DE;
-			remoteInfo = Development;
-		};
 		AF7122171B5D990600E237DE /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AFCB5D141B5D497C0070E80E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AFCB5D1C1B5D497C0070E80E;
-			remoteInfo = SuperPageControl;
-		};
-		AFCB5D2A1B5D497D0070E80E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AFCB5D141B5D497C0070E80E /* Project object */;
 			proxyType = 1;
@@ -52,15 +35,9 @@
 		AF7121FE1B5D98ED00E237DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AF7122001B5D98ED00E237DE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AF7122031B5D98ED00E237DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		AF7122091B5D98ED00E237DE /* DevelopmentTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DevelopmentTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AF71220E1B5D98ED00E237DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AF71220F1B5D98ED00E237DE /* DevelopmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevelopmentTests.swift; sourceTree = "<group>"; };
 		AFCB5D1D1B5D497C0070E80E /* SuperPageControl.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SuperPageControl.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFCB5D211B5D497C0070E80E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFCB5D221B5D497C0070E80E /* SuperPageControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuperPageControl.h; sourceTree = "<group>"; };
-		AFCB5D281B5D497D0070E80E /* SuperPageControlTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperPageControlTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AFCB5D2E1B5D497D0070E80E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AFCB5D2F1B5D497D0070E80E /* SuperPageControlTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperPageControlTests.swift; sourceTree = "<group>"; };
 		AFCB5D391B5D49A60070E80E /* SuperPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperPageControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,25 +50,10 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AF7122061B5D98ED00E237DE /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AFCB5D191B5D497C0070E80E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AFCB5D251B5D497D0070E80E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AFCB5D291B5D497D0070E80E /* SuperPageControl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,30 +81,11 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		AF71220C1B5D98ED00E237DE /* DevelopmentTests */ = {
-			isa = PBXGroup;
-			children = (
-				AF71220F1B5D98ED00E237DE /* DevelopmentTests.swift */,
-				AF71220D1B5D98ED00E237DE /* Supporting Files */,
-			);
-			path = DevelopmentTests;
-			sourceTree = "<group>";
-		};
-		AF71220D1B5D98ED00E237DE /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				AF71220E1B5D98ED00E237DE /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		AFCB5D131B5D497C0070E80E = {
 			isa = PBXGroup;
 			children = (
 				AFCB5D1F1B5D497C0070E80E /* SuperPageControl */,
-				AFCB5D2C1B5D497D0070E80E /* SuperPageControlTests */,
 				AF7121F61B5D98ED00E237DE /* Development */,
-				AF71220C1B5D98ED00E237DE /* DevelopmentTests */,
 				AFCB5D1E1B5D497C0070E80E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -151,9 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				AFCB5D1D1B5D497C0070E80E /* SuperPageControl.framework */,
-				AFCB5D281B5D497D0070E80E /* SuperPageControlTests.xctest */,
 				AF7121F51B5D98ED00E237DE /* Development.app */,
-				AF7122091B5D98ED00E237DE /* DevelopmentTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -172,23 +113,6 @@
 			isa = PBXGroup;
 			children = (
 				AFCB5D211B5D497C0070E80E /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		AFCB5D2C1B5D497D0070E80E /* SuperPageControlTests */ = {
-			isa = PBXGroup;
-			children = (
-				AFCB5D2F1B5D497D0070E80E /* SuperPageControlTests.swift */,
-				AFCB5D2D1B5D497D0070E80E /* Supporting Files */,
-			);
-			path = SuperPageControlTests;
-			sourceTree = "<group>";
-		};
-		AFCB5D2D1B5D497D0070E80E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				AFCB5D2E1B5D497D0070E80E /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -225,24 +149,6 @@
 			productReference = AF7121F51B5D98ED00E237DE /* Development.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AF7122081B5D98ED00E237DE /* DevelopmentTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AF7122161B5D98ED00E237DE /* Build configuration list for PBXNativeTarget "DevelopmentTests" */;
-			buildPhases = (
-				AF7122051B5D98ED00E237DE /* Sources */,
-				AF7122061B5D98ED00E237DE /* Frameworks */,
-				AF7122071B5D98ED00E237DE /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AF71220B1B5D98ED00E237DE /* PBXTargetDependency */,
-			);
-			name = DevelopmentTests;
-			productName = DevelopmentTests;
-			productReference = AF7122091B5D98ED00E237DE /* DevelopmentTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		AFCB5D1C1B5D497C0070E80E /* SuperPageControl */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = AFCB5D331B5D497D0070E80E /* Build configuration list for PBXNativeTarget "SuperPageControl" */;
@@ -261,24 +167,6 @@
 			productReference = AFCB5D1D1B5D497C0070E80E /* SuperPageControl.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		AFCB5D271B5D497D0070E80E /* SuperPageControlTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AFCB5D361B5D497D0070E80E /* Build configuration list for PBXNativeTarget "SuperPageControlTests" */;
-			buildPhases = (
-				AFCB5D241B5D497D0070E80E /* Sources */,
-				AFCB5D251B5D497D0070E80E /* Frameworks */,
-				AFCB5D261B5D497D0070E80E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AFCB5D2B1B5D497D0070E80E /* PBXTargetDependency */,
-			);
-			name = SuperPageControlTests;
-			productName = SuperPageControlTests;
-			productReference = AFCB5D281B5D497D0070E80E /* SuperPageControlTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -293,14 +181,7 @@
 					AF7121F41B5D98ED00E237DE = {
 						CreatedOnToolsVersion = 6.4;
 					};
-					AF7122081B5D98ED00E237DE = {
-						CreatedOnToolsVersion = 6.4;
-						TestTargetID = AF7121F41B5D98ED00E237DE;
-					};
 					AFCB5D1C1B5D497C0070E80E = {
-						CreatedOnToolsVersion = 6.4;
-					};
-					AFCB5D271B5D497D0070E80E = {
 						CreatedOnToolsVersion = 6.4;
 					};
 				};
@@ -319,9 +200,7 @@
 			projectRoot = "";
 			targets = (
 				AFCB5D1C1B5D497C0070E80E /* SuperPageControl */,
-				AFCB5D271B5D497D0070E80E /* SuperPageControlTests */,
 				AF7121F41B5D98ED00E237DE /* Development */,
-				AF7122081B5D98ED00E237DE /* DevelopmentTests */,
 			);
 		};
 /* End PBXProject section */
@@ -337,21 +216,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AF7122071B5D98ED00E237DE /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AFCB5D1B1B5D497C0070E80E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AFCB5D261B5D497D0070E80E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -370,14 +235,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AF7122051B5D98ED00E237DE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AF7122101B5D98ED00E237DE /* DevelopmentTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		AFCB5D181B5D497C0070E80E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -386,31 +243,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AFCB5D241B5D497D0070E80E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AFCB5D301B5D497D0070E80E /* SuperPageControlTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		AF71220B1B5D98ED00E237DE /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AF7121F41B5D98ED00E237DE /* Development */;
-			targetProxy = AF71220A1B5D98ED00E237DE /* PBXContainerItemProxy */;
-		};
 		AF7122181B5D990600E237DE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = AFCB5D1C1B5D497C0070E80E /* SuperPageControl */;
 			targetProxy = AF7122171B5D990600E237DE /* PBXContainerItemProxy */;
-		};
-		AFCB5D2B1B5D497D0070E80E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AFCB5D1C1B5D497C0070E80E /* SuperPageControl */;
-			targetProxy = AFCB5D2A1B5D497D0070E80E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -457,42 +296,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.kylejm.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		AF7122131B5D98ED00E237DE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = DevelopmentTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "io.kylejm.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Development.app/Development";
-			};
-			name = Debug;
-		};
-		AF7122141B5D98ED00E237DE /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = DevelopmentTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "io.kylejm.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Development.app/Development";
 			};
 			name = Release;
 		};
@@ -623,38 +426,6 @@
 			};
 			name = Release;
 		};
-		AFCB5D371B5D497D0070E80E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SuperPageControlTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "io.kylejm.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		AFCB5D381B5D497D0070E80E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SuperPageControlTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "io.kylejm.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -663,15 +434,6 @@
 			buildConfigurations = (
 				AF7122111B5D98ED00E237DE /* Debug */,
 				AF7122121B5D98ED00E237DE /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AF7122161B5D98ED00E237DE /* Build configuration list for PBXNativeTarget "DevelopmentTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AF7122131B5D98ED00E237DE /* Debug */,
-				AF7122141B5D98ED00E237DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -690,15 +452,6 @@
 			buildConfigurations = (
 				AFCB5D341B5D497D0070E80E /* Debug */,
 				AFCB5D351B5D497D0070E80E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AFCB5D361B5D497D0070E80E /* Build configuration list for PBXNativeTarget "SuperPageControlTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AFCB5D371B5D497D0070E80E /* Debug */,
-				AFCB5D381B5D497D0070E80E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
