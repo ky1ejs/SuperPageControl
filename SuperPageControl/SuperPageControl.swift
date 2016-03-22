@@ -376,12 +376,12 @@ public func ==(lhs: SuperPageControlShapeConfiguation, rhs: SuperPageControlShap
         return false
     }
     if let lhsShadow = lhs.shadow, rhsShadow = rhs.shadow {
-        if !(lhsShadow == rhsShadow) {
+        if lhsShadow != rhsShadow {
             return false
         }
     }
     if let lhsSelectedShadow = lhs.selectedShadow, rhsSelectedShadow = rhs.selectedShadow {
-        if !(lhsSelectedShadow == rhsSelectedShadow) {
+        if lhsSelectedShadow != rhsSelectedShadow {
             return false
         }
     }
