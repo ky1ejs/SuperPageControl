@@ -76,7 +76,7 @@ import UIKit
         }
     }
     
-    // mark - Initialisation
+    // MARK - Initialisation
     func initialise() {
         self.contentMode = .Redraw
     }
@@ -162,8 +162,8 @@ import UIKit
                 CGContextFillPath(context)
                 break
             case let .Shape(shapeConfig):
-                if i == self.currentPage, let shadow = shapeConfig.selectedShadow where shadow.color != .clearColor() {
-                    CGContextSetShadowWithColor(context, shadow.offset, shadow.blur, shadow.color.CGColor)
+                if i == self.currentPage, let selectedShadow = shapeConfig.selectedShadow where selectedShadow.color != .clearColor() {
+                    CGContextSetShadowWithColor(context, selectedShadow.offset, selectedShadow.blur, selectedShadow.color.CGColor)
                 } else if let shadow = shapeConfig.shadow where shadow.color != .clearColor() {
                     CGContextSetShadowWithColor(context, shadow.offset, shadow.blur, shadow.color.CGColor)
                 }
