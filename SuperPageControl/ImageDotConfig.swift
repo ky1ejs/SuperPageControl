@@ -11,10 +11,8 @@ import UIKit
 public struct ImageDotConfig {
     public let image: UIImage
     public var tintColor: UIColor?          // No tint color if not set
-    public var size: CGSize?                // Falls back on global size
     public var selectedImage: UIImage?      // Falls back on image
     public var selectedTintColor: UIColor?  // Falls back on tintColor
-    public var selectedSize: CGSize?        // Falls back on size
     
     public init(image: UIImage) {
         self.image = image
