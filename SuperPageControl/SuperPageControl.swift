@@ -114,18 +114,13 @@ import UIKit
                 CGContextTranslateCTM(context, (self.frame.size.width - size.width) / 2, self.frame.size.height / 2)
             }
             
-            // Change to if statement when Swift 2.0 brings switch's pattern matching to if
-            switch self.mode {
-            case let .Individual(generator):
+            if case .Individual(let generator) = self.mode {
                 for i in 0...self.numberOfPages - 1 {
-                    self.drawDot(generator(index: i, pageControl: self), atIndex: i, context: context)
+                    let mode = generator(index: i, pageControl: self)
+                    self.drawDot(mode, atIndex: i, context: context)
                 }
-                break
-            default:
-                for i in 0...self.numberOfPages - 1 {
-                    self.drawDot(self.mode, atIndex: i, context: context)
-                }
-                break
+            } else {
+                (0...self.numberOfPages - 1).forEach() { self.drawDot(self.mode, atIndex: $0, context: context) }
             }
         }
     }
