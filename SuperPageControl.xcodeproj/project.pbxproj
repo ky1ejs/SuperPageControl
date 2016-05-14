@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF35134E1CE750E700FCDF77 /* DotMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF35134D1CE750E700FCDF77 /* DotMode.swift */; };
+		AF3513501CE751BD00FCDF77 /* ShapeDotConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF35134F1CE751BD00FCDF77 /* ShapeDotConfig.swift */; };
+		AF3513521CE751D600FCDF77 /* ImageDotConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3513511CE751D600FCDF77 /* ImageDotConfig.swift */; };
+		AF3513541CE7543000FCDF77 /* UIImageHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF3513531CE7543000FCDF77 /* UIImageHelpers.swift */; };
 		AF7121FA1B5D98ED00E237DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7121F91B5D98ED00E237DE /* AppDelegate.swift */; };
 		AF7121FC1B5D98ED00E237DE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF7121FB1B5D98ED00E237DE /* ViewController.swift */; };
 		AF7121FF1B5D98ED00E237DE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF7121FD1B5D98ED00E237DE /* Main.storyboard */; };
@@ -28,6 +32,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AF35134D1CE750E700FCDF77 /* DotMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotMode.swift; sourceTree = "<group>"; };
+		AF35134F1CE751BD00FCDF77 /* ShapeDotConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeDotConfig.swift; sourceTree = "<group>"; };
+		AF3513511CE751D600FCDF77 /* ImageDotConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDotConfig.swift; sourceTree = "<group>"; };
+		AF3513531CE7543000FCDF77 /* UIImageHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageHelpers.swift; sourceTree = "<group>"; };
 		AF7121F51B5D98ED00E237DE /* Development.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Development.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF7121F81B5D98ED00E237DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF7121F91B5D98ED00E237DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -102,8 +110,11 @@
 		AFCB5D1F1B5D497C0070E80E /* SuperPageControl */ = {
 			isa = PBXGroup;
 			children = (
+				AF35134D1CE750E700FCDF77 /* DotMode.swift */,
+				AF3513511CE751D600FCDF77 /* ImageDotConfig.swift */,
+				AF35134F1CE751BD00FCDF77 /* ShapeDotConfig.swift */,
 				AFCB5D391B5D49A60070E80E /* SuperPageControl.swift */,
-				AFCB5D221B5D497C0070E80E /* SuperPageControl.h */,
+				AF3513531CE7543000FCDF77 /* UIImageHelpers.swift */,
 				AFCB5D201B5D497C0070E80E /* Supporting Files */,
 			);
 			path = SuperPageControl;
@@ -112,6 +123,7 @@
 		AFCB5D201B5D497C0070E80E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AFCB5D221B5D497C0070E80E /* SuperPageControl.h */,
 				AFCB5D211B5D497C0070E80E /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -239,7 +251,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF3513501CE751BD00FCDF77 /* ShapeDotConfig.swift in Sources */,
 				AFCB5D3A1B5D49A60070E80E /* SuperPageControl.swift in Sources */,
+				AF35134E1CE750E700FCDF77 /* DotMode.swift in Sources */,
+				AF3513521CE751D600FCDF77 /* ImageDotConfig.swift in Sources */,
+				AF3513541CE7543000FCDF77 /* UIImageHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
