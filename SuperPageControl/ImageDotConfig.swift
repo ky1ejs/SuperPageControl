@@ -10,13 +10,19 @@ import UIKit
 
 public struct ImageDotConfig {
     public let image: UIImage
-    public var tintColor: UIColor?          // No tint color if not set
-    public var selectedImage: UIImage?      // Falls back on image
-    public var selectedTintColor: UIColor?  // Falls back on tintColor
+    public var tintColor: UIColor? 
     
-    public init(image: UIImage) {
-        self.image = image
+    private var _selectedImage: UIImage?
+    public var selectedImage: UIImage { return self.selectedImage ?? self.image }
+    public mutating func setSelectedImage(image: UIImage?) { self._selectedImage = image }
+    
+    private var _selectedTintColor: UIColor?
+    public var selectedTintColor: UIColor? {
+        get { return self._selectedTintColor ?? self.tintColor }
+        set { self._selectedTintColor = newValue }
     }
+    
+    public init(image: UIImage) { self.image = image }
 }
 
 

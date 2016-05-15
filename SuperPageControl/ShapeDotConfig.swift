@@ -8,7 +8,7 @@
 
 import UIKit
 
-public enum ShapeDot {
+public enum Shape {
     case Circle
     case Square
     case Triangle
@@ -17,16 +17,25 @@ public enum ShapeDot {
 public typealias Shadow = (size: CGFloat, offset: CGSize, color: UIColor, blur: CGFloat)
 
 public struct ShapeDotConfig {
-    public let shape: ShapeDot
-    public var color: UIColor?                                  // Set to 0.25 alpha of selectedColor if nil
-    public var shadow: Shadow?                                  // Optional, no shadow if nil
-    public var selectedShape: ShapeDot?                         // Falls back on shape
-    public var selectedColor: UIColor = UIColor.blackColor()
-    public var selectedShadow: Shadow?                          // Falls back on shadow
+    public let shape: Shape
+    public var color: UIColor = UIColor.blackColor().colorWithAlphaComponent(0.25)
+    public var shadow: Shadow?
     
-    public init(shape: ShapeDot) {
-        self.shape = shape
+    private var _selectedShape: Shape?
+    public var selectedShape: Shape { return self._selectedShape ?? self.shape }
+    public mutating func setSelectedShape(shape: Shape?) { self._selectedShape = shape }
+    
+    private var _selectedColor: UIColor?
+    public var selectedColor: UIColor { return self._selectedColor ?? self.color }
+    public mutating func setSelectedColor(color: UIColor?) { self._selectedColor = color }
+    
+    private var _selectedShadow: Shadow?
+    public var selectedShadow: Shadow? {
+        get { return self._selectedShadow ?? self.shadow }
+        set { self._selectedShadow = newValue }
     }
+    
+    public init(shape: Shape) { self.shape = shape }
 }
 
 

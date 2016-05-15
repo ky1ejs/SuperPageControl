@@ -35,7 +35,6 @@ import UIKit
             }
         }
     }
-    //    @property (nonatomic, assign, getter = isWrapEnabled) IBInspectable BOOL wrapEnabled;
     @IBInspectable public var vertical: Bool = false {
         didSet {
             if vertical != oldValue {
@@ -46,12 +45,9 @@ import UIKit
     
     public var mode = DotMode.Shape(ShapeDotConfig(shape: .Circle)) {
         didSet {
-            // TODO: check equality when setting .Individual cases bad access
-            // unless you stick a break point in the SuperPageControlDotMode
-            // == function
-//            if mode != oldValue {
+            if mode != oldValue {
                 self.setNeedsDisplay()
-//            }
+            }
         }
     }
     @IBInspectable public var dotSpaceing: CGFloat = 10 {
@@ -137,25 +133,17 @@ import UIKit
             
             switch mode {
             case let .Image(imageConfig):
-                var dotImage = imageConfig.image
-                var tint = imageConfig.tintColor
-                if i == self.currentPage {
-                    if let selectedImage = imageConfig.selectedImage {
-                        dotImage = selectedImage
-                    }
-                    tint = imageConfig.selectedTintColor
-                }
-                if tint != nil {
-                    dotImage = dotImage.tintWithColor(tint!)
+                var dotImage = i == self.currentPage ? imageConfig.selectedImage : imageConfig.image
+                let tint = i == self.currentPage ? imageConfig.selectedTintColor : imageConfig.tintColor
+                if let tint = tint {
+                    dotImage = dotImage.tintWithColor(tint)
                 }
                 dotImage.drawInRect(CGRectMake(-dotSize / 2, -dotSize / 2, dotSize, dotSize))
-                break
             case let .Path(path, selectedPath):
                 let dotPath = (i == self.currentPage) ? selectedPath ?? path : path
                 CGContextBeginPath(context)
                 CGContextAddPath(context, dotPath)
                 CGContextFillPath(context)
-                break
             case let .Shape(shapeConfig):
                 if i == self.currentPage, let selectedShadow = shapeConfig.selectedShadow where selectedShadow.color != .clearColor() {
                     CGContextSetShadowWithColor(context, selectedShadow.offset, selectedShadow.blur, selectedShadow.color.CGColor)
@@ -165,10 +153,8 @@ import UIKit
                 
                 if i == self.currentPage {
                     shapeConfig.selectedColor.setFill()
-                } else if let dotColor = shapeConfig.color {
-                    dotColor.setFill()
                 } else {
-                    shapeConfig.selectedColor.colorWithAlphaComponent(0.25).setFill()
+                    shapeConfig.color.setFill()
                 }
                 
                 let dotSize = (i == self.currentPage) ? self.selectedDotSize ?? self.dotSize : self.dotSize
@@ -176,10 +162,8 @@ import UIKit
                 switch dotShape {
                 case .Circle:
                     CGContextFillEllipseInRect(context, CGRectMake(-dotSize / 2, -dotSize / 2, dotSize, dotSize));
-                    break
                 case .Square:
                     CGContextFillRect(context, CGRectMake(-dotSize / 2, -dotSize / 2, dotSize, dotSize));
-                    break
                 case .Triangle:
                     CGContextBeginPath(context);
                     CGContextMoveToPoint(context, 0, -dotSize / 2);
@@ -187,9 +171,7 @@ import UIKit
                     CGContextAddLineToPoint(context, -dotSize / 2, dotSize / 2);
                     CGContextAddLineToPoint(context, 0, -dotSize / 2);
                     CGContextFillPath(context);
-                    break
                 }
-                break
             default:
                 break
             }
