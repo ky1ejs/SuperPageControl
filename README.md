@@ -5,9 +5,6 @@ SuperPageControl is a replacement for UIPageControl that gives:
 - CGPaths
 - Granular control over each dot
 
-**Swift 2 since v0.3**
-
-
 ### Carthage
 
 ```
@@ -17,27 +14,22 @@ github "kylejm/SuperPageControl" >= 0.1
 ### Modes
 
 ```swift
-.Image(UIImage)
-.Path(CGPathRef)
-.Preset(SuperPageControlDotShape)
-.Individual(SuperPageControlDelegate)
-```
+public enum DotMode: Equatable {
+    case Image(ImageDotConfig)
+    case Path(path: CGPathRef, selectedPath: CGPathRef?)
+    case Shape(ShapeDotConfig)
+    case Individual(DotModeGenerator)
+}
 
-The `.Individual`'s associated delegate gets asked for the mode for each individual dot.
+public typealias DotModeGenerator = (index: Int, pageControl: SuperPageControl) -> DotMode
+```
 
 ### Preset shapes
 
 ```swift
-enum SuperPageControlDotShape {
+enum Shape {
     case Circle
     case Square
     case Triangle
 }
 ```
-
-Please write more and PR :smile:
-
-### Todo
-
-- [ ] Delegate handling of dot colors
-- [ ] Weak delegate - problem with making SuperPageControlDelegate Equatable and keeping enum association. See code comment.
