@@ -96,6 +96,10 @@ import UIKit
         self.setNeedsDisplay()
     }
     
+    public override func layoutSubviews() {
+        self.setNeedsDisplay()
+    }
+    
     override public func drawRect(rect: CGRect) {
         self.drawForMode(self.mode)
     }
