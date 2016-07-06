@@ -36,7 +36,7 @@
 		AF35134F1CE751BD00FCDF77 /* ShapeDotConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShapeDotConfig.swift; sourceTree = "<group>"; };
 		AF3513511CE751D600FCDF77 /* ImageDotConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDotConfig.swift; sourceTree = "<group>"; };
 		AF3513531CE7543000FCDF77 /* UIImageHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageHelpers.swift; sourceTree = "<group>"; };
-		AF7121F51B5D98ED00E237DE /* Development.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Development.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF7121F51B5D98ED00E237DE /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF7121F81B5D98ED00E237DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF7121F91B5D98ED00E237DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF7121FB1B5D98ED00E237DE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -68,7 +68,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AF7121F61B5D98ED00E237DE /* Development */ = {
+		AF7121F61B5D98ED00E237DE /* Example */ = {
 			isa = PBXGroup;
 			children = (
 				AF7121F91B5D98ED00E237DE /* AppDelegate.swift */,
@@ -78,7 +78,7 @@
 				AF7122021B5D98ED00E237DE /* LaunchScreen.xib */,
 				AF7121F71B5D98ED00E237DE /* Supporting Files */,
 			);
-			path = Development;
+			path = Example;
 			sourceTree = "<group>";
 		};
 		AF7121F71B5D98ED00E237DE /* Supporting Files */ = {
@@ -93,7 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				AFCB5D1F1B5D497C0070E80E /* SuperPageControl */,
-				AF7121F61B5D98ED00E237DE /* Development */,
+				AF7121F61B5D98ED00E237DE /* Example */,
 				AFCB5D1E1B5D497C0070E80E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -102,7 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				AFCB5D1D1B5D497C0070E80E /* SuperPageControl.framework */,
-				AF7121F51B5D98ED00E237DE /* Development.app */,
+				AF7121F51B5D98ED00E237DE /* Example.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -143,9 +143,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		AF7121F41B5D98ED00E237DE /* Development */ = {
+		AF7121F41B5D98ED00E237DE /* Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = AF7122151B5D98ED00E237DE /* Build configuration list for PBXNativeTarget "Development" */;
+			buildConfigurationList = AF7122151B5D98ED00E237DE /* Build configuration list for PBXNativeTarget "Example" */;
 			buildPhases = (
 				AF7121F11B5D98ED00E237DE /* Sources */,
 				AF7121F21B5D98ED00E237DE /* Frameworks */,
@@ -156,9 +156,9 @@
 			dependencies = (
 				AF7122181B5D990600E237DE /* PBXTargetDependency */,
 			);
-			name = Development;
+			name = Example;
 			productName = Development;
-			productReference = AF7121F51B5D98ED00E237DE /* Development.app */;
+			productReference = AF7121F51B5D98ED00E237DE /* Example.app */;
 			productType = "com.apple.product-type.application";
 		};
 		AFCB5D1C1B5D497C0070E80E /* SuperPageControl */ = {
@@ -212,7 +212,7 @@
 			projectRoot = "";
 			targets = (
 				AFCB5D1C1B5D497C0070E80E /* SuperPageControl */,
-				AF7121F41B5D98ED00E237DE /* Development */,
+				AF7121F41B5D98ED00E237DE /* Example */,
 			);
 		};
 /* End PBXProject section */
@@ -297,7 +297,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = Development/Info.plist;
+				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.kylejm.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -308,7 +308,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Development/Info.plist;
+				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "io.kylejm.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -445,7 +445,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		AF7122151B5D98ED00E237DE /* Build configuration list for PBXNativeTarget "Development" */ = {
+		AF7122151B5D98ED00E237DE /* Build configuration list for PBXNativeTarget "Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AF7122111B5D98ED00E237DE /* Debug */,
