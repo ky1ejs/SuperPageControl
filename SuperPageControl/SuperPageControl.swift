@@ -11,6 +11,7 @@ import UIKit
     @IBInspectable public var numberOfPages: Int = 1 {
         didSet {
             if numberOfPages != oldValue {
+                self.invalidateIntrinsicContentSize()
                 self.setNeedsDisplay()
             }
         }
