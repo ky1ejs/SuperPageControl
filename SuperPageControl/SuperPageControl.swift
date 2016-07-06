@@ -120,7 +120,10 @@ import UIKit
                     self.drawDot(mode, atIndex: i, context: context)
                 }
             } else {
-                (0...self.numberOfPages - 1).forEach() { self.drawDot(self.mode, atIndex: $0, context: context) }
+                (0...self.numberOfPages - 1).forEach() { [weak self] in
+                    guard let safeSelf = self else { return }
+                    safeSelf.drawDot(safeSelf.mode, atIndex: $0, context: context)
+                }
             }
         }
     }
