@@ -89,7 +89,7 @@ import UIKit
     
     public func sizeForNumberOfPages(numberOfPages: Int) -> CGSize {
         let width = self.dotSize + (self.dotSize + self.dotSpaceing) * CGFloat((numberOfPages - 1))
-        return self.vertical ? CGSizeMake(self.dotSize, width) : CGSizeMake(width, self.dotSize);
+        return self.vertical ? CGSizeMake(self.dotSize, width) : CGSizeMake(width, self.dotSize)
     }
     
     public func updateCurrentPageDisplay() {
@@ -136,7 +136,7 @@ import UIKit
             // Offset for dot i
             CGContextSaveGState(context)
             let offset = (self.dotSize + self.dotSpaceing) * CGFloat(i) + self.dotSize / 2
-            CGContextTranslateCTM(context, self.vertical ? 0 : offset, self.vertical ? offset : 0);
+            CGContextTranslateCTM(context, self.vertical ? 0 : offset, self.vertical ? offset : 0)
             
             switch mode {
             case let .Image(imageConfig):
@@ -168,22 +168,22 @@ import UIKit
                 let dotShape = (i == self.currentPage) ? shapeConfig.selectedShape ?? shapeConfig.shape : shapeConfig.shape
                 switch dotShape {
                 case .Circle:
-                    CGContextFillEllipseInRect(context, CGRectMake(-dotSize / 2, -dotSize / 2, dotSize, dotSize));
+                    CGContextFillEllipseInRect(context, CGRectMake(-dotSize / 2, -dotSize / 2, dotSize, dotSize))
                 case .Square:
-                    CGContextFillRect(context, CGRectMake(-dotSize / 2, -dotSize / 2, dotSize, dotSize));
+                    CGContextFillRect(context, CGRectMake(-dotSize / 2, -dotSize / 2, dotSize, dotSize))
                 case .Triangle:
-                    CGContextBeginPath(context);
-                    CGContextMoveToPoint(context, 0, -dotSize / 2);
-                    CGContextAddLineToPoint(context, dotSize / 2, dotSize / 2);
-                    CGContextAddLineToPoint(context, -dotSize / 2, dotSize / 2);
-                    CGContextAddLineToPoint(context, 0, -dotSize / 2);
-                    CGContextFillPath(context);
+                    CGContextBeginPath(context)
+                    CGContextMoveToPoint(context, 0, -dotSize / 2)
+                    CGContextAddLineToPoint(context, dotSize / 2, dotSize / 2)
+                    CGContextAddLineToPoint(context, -dotSize / 2, dotSize / 2)
+                    CGContextAddLineToPoint(context, 0, -dotSize / 2)
+                    CGContextFillPath(context)
                 }
             default:
                 break
             }
             
-            CGContextRestoreGState(context);
+            CGContextRestoreGState(context)
             break
         }
     }

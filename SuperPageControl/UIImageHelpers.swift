@@ -19,10 +19,10 @@ extension UIImage {
         let rect = CGRectMake(0, 0, self.size.width, self.size.height)
         CGContextClipToMask(context, rect, self.CGImage)
         color.setFill()
-        CGContextFillRect(context, rect);
-        let newImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
+        CGContextFillRect(context, rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
         CGContextRestoreGState(context)
-        return newImage;
+        return newImage
     }
 }
