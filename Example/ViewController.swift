@@ -12,6 +12,7 @@ import SuperPageControl
 class ViewController: UIViewController {
     @IBOutlet weak var pageControl: SuperPageControl!
     private var secondPageControl = SuperPageControl()
+    private var thridPageControl = SuperPageControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,24 @@ class ViewController: UIViewController {
         let topConstraint = self.secondPageControl.topAnchor.constraintEqualToAnchor(self.view.topAnchor)
         topConstraint.constant = 100
         topConstraint.active = true
+        
+        self.view.addSubview(self.thridPageControl)
+        self.thridPageControl.translatesAutoresizingMaskIntoConstraints = false
+        var constraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-150-[pc]", options: [], metrics: nil, views: ["pc" : self.thridPageControl])
+        constraints.append(NSLayoutConstraint(item: self.thridPageControl, attribute: .CenterX, relatedBy: .Equal, toItem: self.view, attribute: .CenterX, multiplier: 1, constant: 0))
+        self.view.addConstraints(constraints)
+        self.thridPageControl.backgroundColor = .clearColor()
+        self.thridPageControl.defersCurrentPageDisplay = true
+        self.thridPageControl.mode = DotMode.Individual({ (index, pageControl) -> DotMode in
+            var tick = ImageDotConfig(image: UIImage(named: "Tick")!)
+            tick.tintColor = UIColor(red:0, green:0, blue:0, alpha: 0.16)
+            tick.selectedTintColor = .whiteColor()
+            return .Image(tick)
+        })
+        self.thridPageControl.dotSize = 20
+        self.thridPageControl.dotSpaceing = 20
+        self.thridPageControl.numberOfPages = 5
+        self.thridPageControl.currentPage = 0
     }
     
     override func viewDidAppear(animated: Bool) {
