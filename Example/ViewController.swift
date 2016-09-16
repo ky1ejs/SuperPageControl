@@ -11,40 +11,40 @@ import SuperPageControl
 
 class ViewController: UIViewController {
     @IBOutlet weak var pageControl: SuperPageControl!
-    private var secondPageControl = SuperPageControl()
-    private var thridPageControl = SuperPageControl()
+    fileprivate var secondPageControl = SuperPageControl()
+    fileprivate var thridPageControl = SuperPageControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.pageControl.mode = DotMode.Individual({ (index, pageControl) -> DotMode in
+        self.pageControl.mode = DotMode.individual({ (index, pageControl) -> DotMode in
             pageControl.selectedDotSize = 20
-            return .Shape(ShapeDotConfig(shape: .Circle))
+            return .shape(ShapeDotConfig(shape: .circle))
         })
         
         self.secondPageControl.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(self.secondPageControl)
-        self.secondPageControl.centerXAnchor.constraintEqualToAnchor(self.view.centerXAnchor).active = true
-        self.secondPageControl.backgroundColor = .clearColor()
-        var shapeConfig = ShapeDotConfig(shape: .Circle)
-        shapeConfig.color = .redColor()
-        shapeConfig.setSelectedColor(.blueColor())
-        self.secondPageControl.mode = .Shape(shapeConfig)
-        let topConstraint = self.secondPageControl.topAnchor.constraintEqualToAnchor(self.view.topAnchor)
+        self.secondPageControl.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        self.secondPageControl.backgroundColor = .clear
+        var shapeConfig = ShapeDotConfig(shape: .circle)
+        shapeConfig.color = .red
+        shapeConfig.setSelectedColor(.blue)
+        self.secondPageControl.mode = .shape(shapeConfig)
+        let topConstraint = self.secondPageControl.topAnchor.constraint(equalTo: self.view.topAnchor)
         topConstraint.constant = 100
-        topConstraint.active = true
+        topConstraint.isActive = true
         
         self.view.addSubview(self.thridPageControl)
         self.thridPageControl.translatesAutoresizingMaskIntoConstraints = false
-        var constraints = NSLayoutConstraint.constraintsWithVisualFormat("V:|-150-[pc]", options: [], metrics: nil, views: ["pc" : self.thridPageControl])
-        constraints.append(NSLayoutConstraint(item: self.thridPageControl, attribute: .CenterX, relatedBy: .Equal, toItem: self.view, attribute: .CenterX, multiplier: 1, constant: 0))
+        var constraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-150-[pc]", options: [], metrics: nil, views: ["pc" : self.thridPageControl])
+        constraints.append(NSLayoutConstraint(item: self.thridPageControl, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1, constant: 0))
         self.view.addConstraints(constraints)
-        self.thridPageControl.backgroundColor = .clearColor()
+        self.thridPageControl.backgroundColor = .clear
         self.thridPageControl.defersCurrentPageDisplay = true
-        self.thridPageControl.mode = DotMode.Individual({ (index, pageControl) -> DotMode in
+        self.thridPageControl.mode = DotMode.individual({ (index, pageControl) -> DotMode in
             var tick = ImageDotConfig(image: UIImage(named: "Tick")!)
             tick.tintColor = UIColor(red:0, green:0, blue:0, alpha: 0.16)
-            tick.selectedTintColor = .whiteColor()
-            return .Image(tick)
+            tick.selectedTintColor = .white
+            return .image(tick)
         })
         self.thridPageControl.dotSize = 20
         self.thridPageControl.dotSpaceing = 20
@@ -52,7 +52,7 @@ class ViewController: UIViewController {
         self.thridPageControl.currentPage = 0
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.secondPageControl.numberOfPages = 5
         self.secondPageControl.currentPage = 2
@@ -63,12 +63,12 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func next(sender: AnyObject) {
+    @IBAction func next(_ sender: AnyObject) {
         self.pageControl.currentPage += 1
         self.secondPageControl.currentPage += 1
     }
     
-    @IBAction func previous(sender: AnyObject) {
+    @IBAction func previous(_ sender: AnyObject) {
         self.pageControl.currentPage -= 1
         self.secondPageControl.currentPage -= 1
     }

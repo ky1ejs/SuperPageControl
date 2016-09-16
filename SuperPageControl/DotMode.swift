@@ -8,18 +8,18 @@
 
 import UIKit
 
-public typealias DotModeGenerator = (index: Int, pageControl: SuperPageControl) -> DotMode
+public typealias DotModeGenerator = (_ index: Int, _ pageControl: SuperPageControl) -> DotMode
 
 public enum DotMode: Equatable {
-    case Image(ImageDotConfig)
-    case Path(path: CGPathRef, selectedPath: CGPathRef?)
-    case Shape(ShapeDotConfig)
-    case Individual(DotModeGenerator)
+    case image(ImageDotConfig)
+    case path(path: CGPath, selectedPath: CGPath?)
+    case shape(ShapeDotConfig)
+    case individual(DotModeGenerator)
     
     // Helper to calculate size
-    func shadowsForPageControl(pageControl: SuperPageControl) -> [Shadow]? {
+    func shadowsForPageControl(_ pageControl: SuperPageControl) -> [Shadow]? {
         switch self {
-        case let .Shape(shapeConfig):
+        case let .shape(shapeConfig):
             var shadows = [Shadow]()
             if let shadow = shapeConfig.shadow {
                 shadows.append(shadow)
@@ -28,10 +28,10 @@ public enum DotMode: Equatable {
                 shadows.append(selectedShadow)
             }
             return (shadows.count > 0) ? shadows : nil
-        case let .Individual(generator):
+        case let .individual(generator):
             var shadows = [Shadow]()
             for i in 0...pageControl.numberOfPages - 1 {
-                if let shadowsForPage = generator(index: i, pageControl: pageControl).shadowsForPageControl(pageControl) {
+                if let shadowsForPage = generator(i, pageControl).shadowsForPageControl(pageControl) {
                     shadows += shadowsForPage
                 }
             }
@@ -46,16 +46,16 @@ public enum DotMode: Equatable {
 // MARK: - Equatable
 public func ==(lhs: DotMode, rhs: DotMode) -> Bool {
     switch (lhs, rhs) {
-    case let (.Image(lhsImageConfig), .Image(rhsImageConfig))
+    case let (.image(lhsImageConfig), .image(rhsImageConfig))
         where lhsImageConfig == rhsImageConfig:
         return true
-    case let (.Path(lhsPath, lhsSelectedPath), .Path(rhsPath, rhsSelectedPath))
+    case let (.path(lhsPath, lhsSelectedPath), .path(rhsPath, rhsSelectedPath))
         where lhsPath === rhsPath && lhsSelectedPath === rhsSelectedPath:
         return true
-    case let (.Shape(lhsShapeConfig), .Shape(rhsShapeConfig))
+    case let (.shape(lhsShapeConfig), .shape(rhsShapeConfig))
         where lhsShapeConfig == rhsShapeConfig:
         return true
-    case (.Individual, .Individual):
+    case (.individual, .individual):
         // Comparing the delegate is hard. Can't make it Equatable as it then can't be used with enums
         // Will come back to this... Famous last words..
         return true

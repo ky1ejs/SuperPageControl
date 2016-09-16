@@ -9,27 +9,27 @@
 import UIKit
 
 public enum Shape {
-    case Circle
-    case Square
-    case Triangle
+    case circle
+    case square
+    case triangle
 }
 
 public typealias Shadow = (size: CGFloat, offset: CGSize, color: UIColor, blur: CGFloat)
 
 public struct ShapeDotConfig {
     public let shape: Shape
-    public var color: UIColor = UIColor.blackColor().colorWithAlphaComponent(0.25)
+    public var color: UIColor = UIColor.black.withAlphaComponent(0.25)
     public var shadow: Shadow?
     
-    private var _selectedShape: Shape?
+    fileprivate var _selectedShape: Shape?
     public var selectedShape: Shape { return self._selectedShape ?? self.shape }
-    public mutating func setSelectedShape(shape: Shape?) { self._selectedShape = shape }
+    public mutating func setSelectedShape(_ shape: Shape?) { self._selectedShape = shape }
     
-    private var _selectedColor: UIColor?
+    fileprivate var _selectedColor: UIColor?
     public var selectedColor: UIColor { return self._selectedColor ?? self.color }
-    public mutating func setSelectedColor(color: UIColor?) { self._selectedColor = color }
+    public mutating func setSelectedColor(_ color: UIColor?) { self._selectedColor = color }
     
-    private var _selectedShadow: Shadow?
+    fileprivate var _selectedShadow: Shadow?
     public var selectedShadow: Shadow? {
         get { return self._selectedShadow ?? self.shadow }
         set { self._selectedShadow = newValue }

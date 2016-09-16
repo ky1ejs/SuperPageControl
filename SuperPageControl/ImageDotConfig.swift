@@ -12,11 +12,11 @@ public struct ImageDotConfig {
     public let image: UIImage
     public var tintColor: UIColor? 
     
-    private var _selectedImage: UIImage?
+    fileprivate var _selectedImage: UIImage?
     public var selectedImage: UIImage { return self._selectedImage ?? self.image }
-    public mutating func setSelectedImage(image: UIImage?) { self._selectedImage = image }
+    public mutating func setSelectedImage(_ image: UIImage?) { self._selectedImage = image }
     
-    private var _selectedTintColor: UIColor?
+    fileprivate var _selectedTintColor: UIColor?
     public var selectedTintColor: UIColor? {
         get { return self._selectedTintColor ?? self.tintColor }
         set { self._selectedTintColor = newValue }

@@ -7,8 +7,8 @@
 
 import UIKit
 
-@IBDesignable public class SuperPageControl: UIControl {
-    @IBInspectable public var numberOfPages: Int = 1 {
+@IBDesignable open class SuperPageControl: UIControl {
+    @IBInspectable open var numberOfPages: Int = 1 {
         didSet {
             if numberOfPages != oldValue {
                 self.invalidateIntrinsicContentSize()
@@ -16,8 +16,8 @@ import UIKit
             }
         }
     }
-    private var _currentPage = 1
-    @IBInspectable public var currentPage: Int {
+    fileprivate var _currentPage = 1
+    @IBInspectable open var currentPage: Int {
         get {
             return _currentPage
         }
@@ -28,15 +28,15 @@ import UIKit
             }
         }
     }
-    @IBInspectable public var defersCurrentPageDisplay: Bool = false
-    @IBInspectable public var hidesForSinglePage = false {
+    @IBInspectable open var defersCurrentPageDisplay: Bool = false
+    @IBInspectable open var hidesForSinglePage = false {
         didSet {
             if hidesForSinglePage != oldValue {
                 self.setNeedsDisplay()
             }
         }
     }
-    @IBInspectable public var vertical: Bool = false {
+    @IBInspectable open var vertical: Bool = false {
         didSet {
             if vertical != oldValue {
                 self.setNeedsDisplay()
@@ -44,28 +44,28 @@ import UIKit
         }
     }
     
-    public var mode = DotMode.Shape(ShapeDotConfig(shape: .Circle)) {
+    open var mode = DotMode.shape(ShapeDotConfig(shape: .circle)) {
         didSet {
             if mode != oldValue {
                 self.setNeedsDisplay()
             }
         }
     }
-    @IBInspectable public var dotSpaceing: CGFloat = 10 {
+    @IBInspectable open var dotSpaceing: CGFloat = 10 {
         didSet {
             if dotSpaceing != oldValue {
                 self.setNeedsDisplay()
             }
         }
     }
-    @IBInspectable public var dotSize: CGFloat = 10 {
+    @IBInspectable open var dotSize: CGFloat = 10 {
         didSet {
             if dotSize != oldValue {
                 self.setNeedsDisplay()
             }
         }
     }
-    @IBInspectable public var selectedDotSize: CGFloat? {
+    @IBInspectable open var selectedDotSize: CGFloat? {
         didSet {
             if selectedDotSize != oldValue {
                 self.setNeedsDisplay()
@@ -75,7 +75,7 @@ import UIKit
     
     // MARK - Initialisation
     func initialise() {
-        self.contentMode = .Redraw
+        self.contentMode = .redraw
     }
     
     override init(frame: CGRect) {
@@ -88,36 +88,36 @@ import UIKit
         self.initialise()
     }
     
-    public func sizeForNumberOfPages(numberOfPages: Int) -> CGSize {
+    open func sizeForNumberOfPages(_ numberOfPages: Int) -> CGSize {
         let width = self.dotSize + (self.dotSize + self.dotSpaceing) * CGFloat((numberOfPages - 1))
-        return self.vertical ? CGSizeMake(self.dotSize, width) : CGSizeMake(width, self.dotSize)
+        return self.vertical ? CGSize(width: self.dotSize, height: width) : CGSize(width: width, height: self.dotSize)
     }
     
-    public func updateCurrentPageDisplay() {
+    open func updateCurrentPageDisplay() {
         self.setNeedsDisplay()
     }
     
-    public override func layoutSubviews() {
+    open override func layoutSubviews() {
         self.setNeedsDisplay()
     }
     
-    override public func drawRect(rect: CGRect) {
+    override open func draw(_ rect: CGRect) {
         self.drawForMode(self.mode)
     }
     
-    func drawForMode(mode: DotMode) {
+    func drawForMode(_ mode: DotMode) {
         if self.numberOfPages > 1 || !self.hidesForSinglePage {
             let context = UIGraphicsGetCurrentContext()!
             let size = self.sizeForNumberOfPages(self.numberOfPages)
             if self.vertical {
-                CGContextTranslateCTM(context, self.frame.size.width / 2, (self.frame.size.height - size.height) / 2)
+                context.translateBy(x: self.frame.size.width / 2, y: (self.frame.size.height - size.height) / 2)
             } else {
-                CGContextTranslateCTM(context, (self.frame.size.width - size.width) / 2, self.frame.size.height / 2)
+                context.translateBy(x: (self.frame.size.width - size.width) / 2, y: self.frame.size.height / 2)
             }
             
-            if case .Individual(let generator) = self.mode {
+            if case .individual(let generator) = self.mode {
                 for i in 0...self.numberOfPages - 1 {
-                    let mode = generator(index: i, pageControl: self)
+                    let mode = generator(i, self)
                     self.drawDot(mode, atIndex: i, context: context)
                 }
             } else {
@@ -129,34 +129,34 @@ import UIKit
         }
     }
     
-    func drawDot(mode: DotMode, atIndex i: Int, context: CGContextRef) {
+    func drawDot(_ mode: DotMode, atIndex i: Int, context: CGContext) {
         switch mode {
-        case .Individual:
+        case .individual:
             self.drawForMode(mode)
         default:
             // Offset for dot i
-            CGContextSaveGState(context)
+            context.saveGState()
             let offset = (self.dotSize + self.dotSpaceing) * CGFloat(i) + self.dotSize / 2
-            CGContextTranslateCTM(context, self.vertical ? 0 : offset, self.vertical ? offset : 0)
+            context.translateBy(x: self.vertical ? 0 : offset, y: self.vertical ? offset : 0)
             
             switch mode {
-            case let .Image(imageConfig):
+            case let .image(imageConfig):
                 var dotImage = i == self.currentPage ? imageConfig.selectedImage : imageConfig.image
                 let tint = i == self.currentPage ? imageConfig.selectedTintColor : imageConfig.tintColor
                 if let tint = tint {
                     dotImage = dotImage.tintWithColor(tint)
                 }
-                dotImage.drawInRect(CGRectMake(-dotSize / 2, -dotSize / 2, dotSize, dotSize))
-            case let .Path(path, selectedPath):
+                dotImage.draw(in: CGRect(x: -dotSize / 2, y: -dotSize / 2, width: dotSize, height: dotSize))
+            case let .path(path, selectedPath):
                 let dotPath = (i == self.currentPage) ? selectedPath ?? path : path
-                CGContextBeginPath(context)
-                CGContextAddPath(context, dotPath)
-                CGContextFillPath(context)
-            case let .Shape(shapeConfig):
-                if i == self.currentPage, let selectedShadow = shapeConfig.selectedShadow where selectedShadow.color != .clearColor() {
-                    CGContextSetShadowWithColor(context, selectedShadow.offset, selectedShadow.blur, selectedShadow.color.CGColor)
-                } else if let shadow = shapeConfig.shadow where shadow.color != .clearColor() {
-                    CGContextSetShadowWithColor(context, shadow.offset, shadow.blur, shadow.color.CGColor)
+                context.beginPath()
+                context.addPath(dotPath)
+                context.fillPath()
+            case let .shape(shapeConfig):
+                if i == self.currentPage, let selectedShadow = shapeConfig.selectedShadow , selectedShadow.color != .clear {
+                    context.setShadow(offset: selectedShadow.offset, blur: selectedShadow.blur, color: selectedShadow.color.cgColor)
+                } else if let shadow = shapeConfig.shadow , shadow.color != .clear {
+                    context.setShadow(offset: shadow.offset, blur: shadow.blur, color: shadow.color.cgColor)
                 }
                 
                 if i == self.currentPage {
@@ -166,32 +166,32 @@ import UIKit
                 }
                 
                 let dotSize = (i == self.currentPage) ? self.selectedDotSize ?? self.dotSize : self.dotSize
-                let dotShape = (i == self.currentPage) ? shapeConfig.selectedShape ?? shapeConfig.shape : shapeConfig.shape
+                let dotShape = (i == self.currentPage) ? shapeConfig.selectedShape : shapeConfig.shape
                 switch dotShape {
-                case .Circle:
-                    CGContextFillEllipseInRect(context, CGRectMake(-dotSize / 2, -dotSize / 2, dotSize, dotSize))
-                case .Square:
-                    CGContextFillRect(context, CGRectMake(-dotSize / 2, -dotSize / 2, dotSize, dotSize))
-                case .Triangle:
-                    CGContextBeginPath(context)
-                    CGContextMoveToPoint(context, 0, -dotSize / 2)
-                    CGContextAddLineToPoint(context, dotSize / 2, dotSize / 2)
-                    CGContextAddLineToPoint(context, -dotSize / 2, dotSize / 2)
-                    CGContextAddLineToPoint(context, 0, -dotSize / 2)
-                    CGContextFillPath(context)
+                case .circle:
+                    context.fillEllipse(in: CGRect(x: -dotSize / 2, y: -dotSize / 2, width: dotSize, height: dotSize))
+                case .square:
+                    context.fill(CGRect(x: -dotSize / 2, y: -dotSize / 2, width: dotSize, height: dotSize))
+                case .triangle:
+                    context.beginPath()
+                    context.move(to: CGPoint(x: 0, y: -dotSize / 2))
+                    context.addLine(to: CGPoint(x: dotSize / 2, y: dotSize / 2))
+                    context.addLine(to: CGPoint(x: -dotSize / 2, y: dotSize / 2))
+                    context.addLine(to: CGPoint(x: 0, y: -dotSize / 2))
+                    context.fillPath()
                 }
             default:
                 break
             }
             
-            CGContextRestoreGState(context)
+            context.restoreGState()
             break
         }
     }
     
-    override public func endTrackingWithTouch(touch: UITouch?, withEvent event: UIEvent?) {
+    override open func endTracking(_ touch: UITouch?, with event: UIEvent?) {
         if let touch = touch {
-            let point = touch.locationInView(self)
+            let point = touch.location(in: self)
             let forward = self.vertical ? (point.y > self.frame.size.height / 2) : (point.x > self.frame.size.width / 2)
             let newPage = forward ? self.currentPage + 1 : self.currentPage - 1
             if newPage >= 0 && newPage < self.numberOfPages {
@@ -199,14 +199,14 @@ import UIKit
                 if !self.defersCurrentPageDisplay {
                     self.setNeedsDisplay()
                 } else {
-                    self.sendActionsForControlEvents(.ValueChanged)
-                    super.endTrackingWithTouch(touch, withEvent: event)
+                    self.sendActions(for: .valueChanged)
+                    super.endTracking(touch, with: event)
                 }
             }
         }
     }
     
-    override public func sizeThatFits(size: CGSize) -> CGSize {
+    override open func sizeThatFits(_ size: CGSize) -> CGSize {
         var dotSize = self.sizeForNumberOfPages(self.numberOfPages)
         if let selectedDotSize = self.selectedDotSize {
             let width = selectedDotSize - self.dotSize
@@ -216,10 +216,10 @@ import UIKit
         }
         
         if let shadows = self.mode.shadowsForPageControl(self) {
-            var shadowOffset = CGSizeZero
+            var shadowOffset = CGSize.zero
             var shadowBlur: CGFloat = 0
             for shadow in shadows {
-                shadowOffset = CGSizeMake(max(shadowOffset.width, shadow.offset.width), max(shadowOffset.height, shadow.offset.height))
+                shadowOffset = CGSize(width: max(shadowOffset.width, shadow.offset.width), height: max(shadowOffset.height, shadow.offset.height))
                 shadowBlur = max(shadowBlur, shadow.blur)
             }
             dotSize.width += (shadowOffset.width * 2) + (shadowBlur * 2)
@@ -229,7 +229,7 @@ import UIKit
         return dotSize
     }
     
-    override public func intrinsicContentSize() -> CGSize {
+    override open var intrinsicContentSize : CGSize {
         return self.sizeThatFits(self.bounds.size)
     }
 }
